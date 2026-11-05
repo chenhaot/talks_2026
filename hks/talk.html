@@ -1,0 +1,1138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Towards Human-centered AI — Chenhao Tan</title><link rel="stylesheet" href="resources/reveal.min.css"><style>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url('resources/dm-sans-400.ttf') format('truetype')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url('resources/dm-sans-600.ttf') format('truetype')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url('resources/dm-sans-700.ttf') format('truetype')}
+    :root {
+      --type-caption: 18px;
+      --type-detail: 24px;
+      --type-body: 36px;
+      --type-title: 54px;
+      --type-display: 72px;
+      --type-hero: 112px;
+      --type-statement: 96px;
+      --type-word: 160px;
+      --bg: #ffffff;
+      --surface: #f2efeb;
+      --border: #ddd7d1;
+      --border-mid: #c8c0b9;
+      --text: #211d1b;
+      --text-mid: #68615d;
+      --text-faint: #9d948e;
+      --green: #800000;
+      --green-mid: #5b0000;
+      --slide-pad-x: clamp(2.5rem, 5vw, 6rem);
+      --slide-pad-y: clamp(2rem, 3.5vh, 3.8rem);
+    }
+
+    html, body { height: 100%; overflow-x: hidden; }
+    .reveal-viewport { background: var(--bg); }
+    .reveal {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .reveal .slides section {
+      background: var(--bg);
+      text-align: left;
+      padding: var(--slide-pad-y) var(--slide-pad-x);
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .reveal .slides section.present,
+    .reveal .slides section.past,
+    .reveal .slides section.future { background: var(--bg); }
+    .reveal .progress { height: 2px; background: var(--border); }
+    .reveal .progress span { background: var(--green); }
+    .reveal .controls { color: var(--text-faint); }
+    .reveal .slide-number {
+      background: transparent;
+      color: var(--text-faint);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .6em;
+      bottom: 18px;
+      right: 24px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+    h1 {
+      font-size: var(--type-hero);
+      font-weight: 700;
+      line-height: .94;
+      letter-spacing: -.05em;
+      text-align: center;
+      white-space: nowrap;
+    }
+    h2 {
+      font-size: var(--type-title);
+      font-weight: 700;
+    }
+    h3 {
+      font-size: var(--type-body);
+      font-weight: 700;
+    }
+    a { color: var(--green); }
+    .slide-header { margin-bottom: clamp(1rem, 2vh, 2rem); }
+
+    .title-meta {
+      margin-top: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--text-mid);
+      font-size: var(--type-detail);
+      font-weight: 400;
+      line-height: 1.55;
+      text-align: left;
+    }
+    .title-meta strong {
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+    }
+    .title-layout {
+      width: min(1550px, 96%);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .title-bottom {
+      width: min(1220px, 88%);
+      margin-top: clamp(4.5rem, 8vh, 7.5rem);
+      padding-top: clamp(1.5rem, 2.8vh, 2.5rem);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: minmax(520px, 1fr) auto;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .title-layout h1 {
+      width: 100%;
+      font-size: var(--type-hero);
+    }
+    .title-accent { color: var(--green); }
+    .title-logos {
+      display: flex;
+      gap: clamp(1.2rem, 2vw, 2rem);
+      align-items: center;
+    }
+    .title-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .title-logo img {
+      display: block;
+      width: clamp(92px, 8vw, 118px);
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+
+    /* Small, persistent references sit below the main slide composition. */
+    .reveal .slides .slide-references {
+      position: absolute;
+      left: var(--slide-pad-x);
+      right: var(--slide-pad-x);
+      bottom: 22px;
+      margin: 0;
+      color: var(--text-mid);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0;
+      text-align: left;
+    }
+    .slide-references a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-mid); text-underline-offset: 3px; }
+    .slide-references a:hover { color: var(--green); }
+
+    /* Act dividers */
+    .act-divider {
+      width: min(1400px, 92%);
+      margin: 0 auto;
+      text-align: left;
+    }
+    .act-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-display);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .act-title .title-accent { color: var(--green); }
+    .act-sub {
+      margin-top: clamp(1.6rem, 3vh, 2.8rem);
+      color: var(--text-mid);
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .alignment-punch {
+      margin-top: clamp(1.8rem, 3.2vh, 2.8rem);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-display);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--green);
+      line-height: 1.1;
+    }
+
+    /* Act content slides (heading, then media) */
+    .act-header {
+      width: min(1480px, 95%);
+      text-align: center;
+      margin: 0 auto clamp(1rem, 2vh, 1.8rem);
+    }
+    .act-header h2 { font-size: var(--type-title); }
+
+    .statement {
+      width: min(92%, 1450px);
+      margin: 0 auto;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-display);
+      font-weight: 400;
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+    .statement strong { color: var(--green); font-weight: 700; }
+    .statement.center { text-align: center; }
+    .statement.small { font-size: var(--type-display); }
+
+    .paper-slide {
+      width: min(1400px, 94%);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .paper-title {
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .paper-title:hover .statement { color: var(--green); }
+    .paper-authors {
+      margin-top: clamp(1.6rem, 3vh, 2.8rem);
+      color: var(--text-mid);
+      font-size: var(--type-body);
+      font-weight: 400;
+      text-align: center;
+    }
+    .paper-portrait {
+      display: block;
+      width: clamp(120px, 10vw, 165px);
+      height: clamp(120px, 10vw, 165px);
+      margin-top: clamp(1.4rem, 2.6vh, 2.4rem);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .image-stage {
+      width: min(1180px, 90%);
+      height: min(70vh, 700px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-stage img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .image-stage.wide-stage {
+      width: min(1500px, 97%);
+      height: min(74vh, 740px);
+    }
+
+    /* Fixed points idea -> outcome flow */
+    .fixed-points-flow {
+      width: min(1320px, 94%);
+      margin: 0 auto;
+      display: grid;
+      justify-items: center;
+      gap: clamp(.5rem, 1.2vh, 1rem);
+    }
+    .fp-idea { width: 100%; display: flex; justify-content: flex-start; }
+    .fp-idea img {
+      display: block;
+      width: min(1040px, 90%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .fp-arrow {
+      align-self: center;
+      color: var(--green);
+      font-size: var(--type-title);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .fp-outcome { width: 100%; display: flex; justify-content: flex-end; }
+    .fp-outcome img {
+      display: block;
+      height: min(56vh, 560px);
+      width: auto;
+      max-width: 90%;
+      margin-right: clamp(2rem, 9vw, 9rem);
+      padding: clamp(.7rem, 1.4vh, 1.4rem);
+      background: #fff;
+      object-fit: contain;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .1);
+    }
+
+    /* Video stage */
+    .act-video-stage {
+      width: min(1280px, 90%);
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      max-height: min(66vh, 680px);
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .act-video-stage iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .act-video-print-link { display: none; }
+
+    .source-link {
+      margin-top: .8rem;
+      color: var(--text-faint);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-detail);
+      text-align: center;
+    }
+    .source-link a {
+      color: var(--text-mid);
+      text-decoration: underline;
+      text-underline-offset: .16em;
+    }
+
+    .system-stage {
+      width: min(1500px, 96%);
+      height: min(70vh, 700px);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .process-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr) minmax(0, .8fr);
+      gap: clamp(.5rem, 1vw, 1rem);
+      align-items: end;
+    }
+    .process-column {
+      display: grid;
+      grid-template-rows: minmax(270px, 30vh) 104px;
+      align-items: end;
+      gap: clamp(.7rem, 1.3vh, 1.2rem);
+    }
+    .process-notes {
+      min-height: 270px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-mid);
+      font-size: var(--type-detail);
+      font-weight: 400;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .process-notes.stage-criteria {
+      font-size: var(--type-body);
+      line-height: 1.32;
+    }
+    .process-image-note {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      padding: .25rem;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .process-image-note img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .process-box {
+      position: relative;
+      z-index: 2;
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 clamp(2.1rem, 3vw, 3.2rem);
+      border: 0;
+      background: linear-gradient(135deg, #fffdfa 0%, #e9e5e0 100%);
+      clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 50%, calc(100% - 34px) 100%, 0 100%, 24px 50%);
+      filter: drop-shadow(0 12px 20px rgba(128, 0, 0, .12));
+      color: var(--green);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 600;
+      text-align: center;
+      transition: width .65s cubic-bezier(.22, 1, .36, 1),
+                  background .65s ease,
+                  opacity .65s ease;
+    }
+    .process-column.muted .process-box {
+      border-color: var(--border-mid);
+      color: var(--text-mid);
+    }
+    .empty-note { visibility: hidden; }
+    .big-question {
+      width: min(1450px, 95%);
+      margin: clamp(1.4rem, 2.6vh, 2.5rem) auto 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+      text-align: center;
+    }
+
+    .question-stack {
+      width: min(1440px, 95%);
+      margin: clamp(1.4rem, 2vh, 2rem) auto 0;
+      display: grid;
+      gap: clamp(.9rem, 1.5vh, 1.35rem);
+    }
+    .question-line {
+      padding: clamp(.85rem, 1.35vh, 1.25rem) 0;
+      color: var(--text-mid);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.24;
+    }
+
+    .compact-process {
+      position: relative;
+      width: min(1370px, 92%);
+      margin: 0 auto clamp(1.5rem, 2.6vh, 2.6rem);
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr) minmax(0, .8fr);
+      gap: clamp(.5rem, 1vw, 1rem);
+    }
+    .compact-process .process-box { height: 88px; }
+    .dynamic-process {
+      grid-template-columns: .8fr 1.4fr .8fr;
+      transition: grid-template-columns .75s cubic-bezier(.22, 1, .36, 1);
+    }
+    .pipeline-shift-slide.shifted .dynamic-process {
+      grid-template-columns: 1.25fr .5fr 1.25fr;
+    }
+    .pipeline-shift-slide.shifted .dynamic-process .process-box:nth-child(1),
+    .pipeline-shift-slide.shifted .dynamic-process .process-box:nth-child(3) {
+      background: linear-gradient(135deg, #fffdfa 0%, #e9e5e0 100%);
+    }
+    .pipeline-shift-slide.shifted .dynamic-process .process-box:nth-child(2) {
+      opacity: .62;
+      padding-right: 2.2rem;
+      padding-left: 2.2rem;
+      font-size: var(--type-detail);
+    }
+    .argument-stack {
+      width: min(1450px, 95%);
+      margin: 0 auto;
+      display: grid;
+      gap: clamp(1rem, 1.7vh, 1.6rem);
+    }
+    .argument {
+      color: var(--text-mid);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--type-body);
+      font-weight: 400;
+      line-height: 1.24;
+    }
+    .argument .teal-emphasis {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .analogy-image {
+      width: min(1150px, 82%);
+      max-height: min(64vh, 650px);
+      margin: 0 auto;
+      object-fit: contain;
+    }
+    .inspiration {
+      margin-top: clamp(1rem, 2vh, 1.8rem);
+      color: var(--text-mid);
+      font-size: var(--type-detail);
+      font-weight: 400;
+      text-align: center;
+    }
+
+    /* Extended layouts for the NICE talk */
+    .maroon-divider { background: var(--bg) !important; color: var(--text); }
+    .maroon-divider .act-divider {
+      padding: clamp(3rem, 8vh, 6.5rem) 0;
+    }
+    .maroon-divider .act-title {
+      color: var(--text);
+      font-size: var(--type-display);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -.04em;
+      text-align: center;
+    }
+    .maroon-divider .act-sub {
+      margin-top: 0;
+      color: var(--text);
+      font-size: var(--type-display);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -.04em;
+      text-align: center;
+    }
+    .maroon-divider .gold { color: var(--green); font-weight: 700; }
+    .hero-word { color: var(--green); font: 700 var(--type-hero)/.9 'DM Sans',sans-serif; letter-spacing:-.06em; text-align:center; }
+    .acts-list { width:min(1150px,82%); margin:3.5rem auto 0; display:grid; gap:1rem; font:400 var(--type-title) 'DM Sans',sans-serif; }
+    .acts-list div { padding:.55rem 0; }
+    .acts-list span { display:inline; width:auto; margin-right:.45em; color:inherit; font-family:'DM Sans',sans-serif; font-weight: 600; }
+    .overview-title { color:var(--green); text-align:center; font-size:var(--type-title); font-weight:700; }
+    .subtitle { width:min(1200px,86%); margin:2rem auto 0; color:var(--text-mid); font-size:var(--type-body); line-height:1.45; text-align:center; }
+    .eyebrow { margin-bottom:1rem; color:var(--green); font:600 1.05rem 'DM Sans',sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .two-col { width:min(1450px,96%); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:clamp(2.5rem,5vw,5.5rem); align-items:center; }
+    .two-col.wide-right { grid-template-columns:.8fr 1.2fr; }
+    .two-col img { display:block; max-width:100%; max-height:62vh; margin:0 auto; object-fit:contain; }
+    .body-copy { color:var(--text-mid); font-size:var(--type-body); font-weight: 400; line-height:1.42; }
+    .body-copy.small { font-size:var(--type-detail); }
+    .body-copy strong { color:var(--text); font-weight:600; }
+    .rule-list { display:grid; gap:1.15rem; }
+    .rule { padding:0 0 1rem; }
+    .rule strong { display:block; margin-bottom:.2rem; color:var(--text); font:600 var(--type-body) 'DM Sans',sans-serif; }
+    .rule span { color:var(--text-mid); font-size:var(--type-detail); line-height:1.35; }
+    .paper-list { width:min(1420px,96%); margin:0 auto; display:grid; gap:1.25rem; }
+    .paper-row { padding-bottom:1rem; border-bottom:1px solid var(--border); }
+    .paper-row .kind { color:var(--green); font:600 .92rem 'DM Sans',sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+    .paper-row h3 { margin:.3rem 0; }
+    .paper-row p { color:var(--text-mid); font-size:var(--type-detail); }
+    .plain-outline { width:min(1420px,94%); margin:0 auto; color:var(--text); font-size:var(--type-body); line-height:1.35; }
+    .plain-outline > ul { padding-left:1.15em; }
+    .plain-outline li { margin:.75rem 0; }
+    .plain-outline li::marker { color:var(--text); }
+    .plain-outline ul ul { margin-top:.65rem; padding-left:1.2em; font-size:.9em; }
+    .paper-inline { margin:.35rem 0 0; color:var(--text-mid); font-size:var(--type-detail); line-height:1.35; }
+    .paper-inline .paper-name { color:var(--text); font-weight: 600; }
+    .overview-focus [data-id],
+    .overview-focus [data-id] h2,
+    .overview-focus [data-id] strong,
+    .overview-focus [data-id] .paper-inline,
+    .overview-focus [data-id] .paper-name,
+    .overview-focus [data-id] a { transition:color .55s ease; }
+    .overview-focus .dim,
+    .overview-focus .dim h2,
+    .overview-focus .dim strong,
+    .overview-focus .dim .paper-inline,
+    .overview-focus .dim .paper-name,
+    .overview-focus .dim a { color:var(--text-faint); }
+    .overview-focus .focus-target { color:var(--green); }
+    .overview-focus .focus-target strong,
+    .overview-focus .focus-target .paper-inline,
+    .overview-focus .focus-target .paper-name,
+    .overview-focus .focus-target a { color:var(--green); }
+    .date-tag {
+      display:inline-block; margin-left:.7rem; padding:.15rem .6rem;
+      border:1px solid var(--border-mid); border-radius:999px; background:var(--surface);
+      color:var(--text-mid); font:400 var(--type-caption)/1.3 'DM Mono', monospace;
+      vertical-align:middle; transition:color .55s ease, border-color .55s ease, opacity .55s ease;
+    }
+    .date-tag.award-tag { margin-left:.4rem; color:#fff; background:var(--green); border-color:var(--green); font-family:'DM Sans',sans-serif; font-weight:600; }
+    .overview-focus .dim .date-tag { opacity:.55; }
+    .overview-focus .focus-target .date-tag.award-tag { color:#fff; }
+    .overview-focus .focus-target .date-tag { color:var(--green); border-color:var(--green); }
+    .modes { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .mode { padding:1.15rem 1.25rem; background:var(--surface); font-size:var(--type-detail); }
+    .timeline { width:min(1320px,94%); margin:1rem auto 0; position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; }
+    .timeline:before { content:''; position:absolute; left:4%; right:4%; top:26px; height:3px; background:var(--border); }
+    .timepoint { position:relative; padding-top:4.5rem; color:var(--text-mid); font-size:var(--type-detail); line-height:1.35; text-align:center; }
+    .timepoint:before { content:''; position:absolute; top:13px; left:calc(50% - 14px); width:28px; height:28px; border-radius:50%; background:var(--green); box-shadow:0 0 0 8px #e9e5e0; }
+    .tier-list { width:min(1380px,94%); margin:0 auto; display:grid; gap:1.1rem; }
+    .tier { display:grid; grid-template-columns:4.5rem .85fr 1.25fr; gap:1.5rem; align-items:baseline; padding:1.15rem 0; border-bottom:1px solid var(--border); }
+    .tier-num { color:var(--green); font:700 1.2rem 'DM Sans',sans-serif; }
+    .tier strong { font:600 var(--type-body) 'DM Sans',sans-serif; }
+    .tier span { color:var(--text-mid); font-size:var(--type-detail); }
+    .code-compare { width:min(1450px,96%); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .code-panel { padding:1.6rem; background:#251f1c; color:#f7eee8; }
+    .code-panel h3 { margin-bottom:1rem; color:#fff; }
+    .code-panel pre { margin:0; white-space:pre-wrap; font:600 var(--type-detail)/1.55 'DM Sans',sans-serif; }
+    .code-panel.good { background:#3a302b; }
+    .manager-flow { width:min(1400px,94%); margin:0 auto; display:grid; grid-template-columns:.8fr auto 1.2fr auto .8fr; gap:1rem; align-items:center; }
+    .manager-flow.expanded { grid-template-columns:.85fr auto .9fr auto 1.15fr auto .9fr; gap:.65rem; }
+    .flow-node { padding:1.2rem; background:var(--surface); border:1px solid var(--border); text-align:center; font-size:var(--type-detail); }
+    .flow-node.manager { color:#fff; background:var(--green); border-color:var(--green); }
+    .reader-stack { display:grid; gap:.55rem; }
+    .flow-arrow { color:var(--green); font:700 2.5rem 'DM Sans',sans-serif; text-align:center; }
+    .flow-tag { display:block; margin-bottom:.35rem; color:var(--green); font:600 var(--type-caption) 'DM Sans',sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+    .flow-copy { display:block; color:var(--text); font-size:var(--type-detail); line-height:1.3; }
+    .manager-flow.expanded .reader-stack .flow-node { padding:.7rem .6rem; }
+    .fixed-flow { width:min(1380px,95%); margin:0 auto; display:grid; grid-template-columns:1.1fr auto .9fr; gap:1.2rem; align-items:center; }
+    .fixed-flow img { display:block; width:100%; max-height:64vh; object-fit:contain; }
+    .fixed-flow .outcome img { padding:1rem; box-sizing:border-box; background:#fff; border:1px solid var(--border); box-shadow:0 12px 30px rgba(70,20,20,.12); }
+    .video-stage { width:min(1200px,88%); margin:0 auto; aspect-ratio:16/9; max-height:64vh; background:#1e1917; border:0; }
+    .video-stage iframe { display:block; width:100%; height:100%; border:0; }
+    .process-bar { width:min(1370px,94%); margin:0 auto 2rem; display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:.8rem; }
+    .process-bar .process-box { color:#fff; background:var(--green); }
+    .process-bar .process-box:nth-child(2) { background:#5b0000; }
+    .line-stack { width:min(1400px,94%); margin:0 auto; display:grid; gap:.8rem; }
+    .line-stack p { margin:0; padding:.7rem 0; color:var(--text-mid); font-size:var(--type-body); line-height:1.3; }
+    .ecosystem { width:min(1400px,95%); margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+    .ecosystem article { padding:1.5rem; background:var(--surface); }
+    .ecosystem h3 { color:var(--green); margin-bottom:1rem; }
+    .ecosystem ul { color:var(--text-mid); font-size:var(--type-detail); line-height:1.35; }
+    .future-list { width:min(1350px,92%); margin:1rem auto 0; display:grid; gap:.8rem; }
+    .future-list p { margin:0; padding:.7rem 0; color:var(--text-mid); font-size:var(--type-body); line-height:1.3; }
+    .babel-stage { width:min(1350px,92%); margin:0 auto; padding:3rem; box-sizing:border-box; background:#251f1c; color:#f7eee8; }
+    .babel-stage .statement { color:#fff; }
+    .cycle-layout { width:min(1380px,94%); margin:0 auto; display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(4rem,8vw,8rem); align-items:center; }
+    .cycle-flow { position:relative; width:min(520px,100%); display:grid; justify-items:center; gap:0; }
+    .cycle-step { width:390px; padding:.65rem 1rem; box-sizing:border-box; border:2px solid var(--green); border-radius:6px; background:var(--surface); color:var(--text); font:600 var(--type-body) 'DM Sans',sans-serif; text-align:center; }
+    .cycle-arrow { position:relative; width:3px; height:38px; background:var(--green); font-size:0; line-height:0; }
+    .cycle-arrow::after { content:''; position:absolute; left:-5px; bottom:0; width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-top:9px solid var(--green); }
+    .cycle-loop { position:absolute; z-index:2; top:34px; bottom:34px; left:calc(50% + 210px); width:48px; border-top:3px solid var(--green); border-right:3px solid var(--green); border-bottom:3px solid var(--green); border-radius:0 20px 20px 0; pointer-events:none; }
+    .cycle-loop::before { content:''; position:absolute; bottom:-3px; left:-15px; width:15px; height:3px; background:var(--green); }
+    .cycle-loop::after { content:''; position:absolute; top:-9px; left:-14px; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-right:14px solid var(--green); }
+    .cycle-notes { display:grid; gap:1.8rem; color:var(--text-mid); font-size:var(--type-body); line-height:1.35; }
+    .harness-notes { display:grid; gap:1.45rem; }
+    .harness-notes strong { display:block; margin-bottom:.25rem; color:var(--text); font:600 var(--type-detail) 'DM Sans',sans-serif; }
+    .harness-notes span { color:var(--text-mid); font-size:var(--type-detail); line-height:1.35; }
+    .review-question { width:min(1350px,92%); margin:0 auto; color:var(--text); font:400 var(--type-body)/1.35 'DM Sans',sans-serif; }
+    .review-approaches { width:min(1400px,95%); margin:clamp(2rem,4vh,3.5rem) auto 0; display:grid; grid-template-columns:1fr 1fr; gap:clamp(2.5rem,5vw,5rem); align-items:start; }
+    .review-approach { color:var(--text-mid); font-size:var(--type-body); line-height:1.4; }
+    .review-approach strong { display:block; margin-bottom:.35rem; color:var(--text); font:600 var(--type-body) 'DM Sans',sans-serif; }
+    .review-approach pre { margin:.7rem 0 0; padding:1.25rem 1.35rem; background:var(--surface); color:var(--text); white-space:pre-wrap; font:600 var(--type-caption)/1.55 'DM Sans',sans-serif; }
+    .sair-idea { width:min(1400px,94%); margin:0 auto; color:var(--text-mid); font-size:var(--type-body); line-height:1.35; }
+    .sair-idea strong { color:var(--text); font-weight:600; }
+    .sair-results { width:min(1420px,96%); margin:clamp(1.5rem,3vh,2.5rem) auto 0; }
+    .sair-results-title { margin-bottom:1rem; color:var(--text); font:600 var(--type-detail) 'DM Sans',sans-serif; }
+    .sair-images { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,4vw,4rem); align-items:center; }
+    .sair-images img { display:block; max-width:100%; max-height:min(48vh,490px); margin:0 auto; object-fit:contain; }
+    .sair-result-column { display:flex; flex-direction:column; align-items:flex-start; }
+    .sair-rank { margin:-.35rem 0 .75rem; color:var(--green); font:700 var(--type-title) 'DM Sans',sans-serif; }
+    .sair-result-column img { max-height:min(40vh,410px); }
+
+
+    /* Shared typography: one prose family, three weights, shared size roles. */
+    .reveal { font-weight: 400; }
+    .statement { font-size: var(--type-statement); }
+    .statement.small { font-size: var(--type-display); }
+    .hero-word { font-size: var(--type-word); }
+    .reveal .statement strong { font-weight: 700; }
+    .reveal strong, .reveal b { font-weight: 600; }
+    .reveal h1, .reveal h2, .reveal h3 { font-weight: 700; }
+    .reveal .slides .act-header h2 { font-size: var(--type-title); }
+    .reveal pre, .reveal code, .review-approach pre, .code-panel pre {
+      font-family: 'DM Mono', monospace;
+      font-size: var(--type-caption);
+      font-weight: 400;
+    }
+    .flow-tag { font-family: 'DM Sans', sans-serif; font-size: var(--type-detail); text-transform: none; letter-spacing: 0; }
+    .rule strong, .harness-notes strong, .review-approach strong { font-size: var(--type-body); font-weight: 600; }
+    .rule span, .harness-notes span { font-size: var(--type-detail); }
+    .source-link, .paper-authors, .inspiration { font-family: 'DM Sans', sans-serif; font-size: var(--type-detail); }
+    .living-copy { width:min(1400px,92%); margin:0 auto; }
+    .submission-charts { width:min(1640px,100%); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .submission-charts img { display:block; width:100%; height:auto; }
+    .living-copy .body-copy,
+    .living-copy .source-link { color:var(--text); }
+    .living-copy .source-link a { color:var(--green); }
+    .living-copy > p { margin:0 0 2rem; }
+    .living-copy .rule-list { margin-bottom:2rem; }
+    .living-results { font-size:var(--type-body); line-height:1.4; }
+    .scientist-examples { width:min(1480px,96%); margin:0 auto; display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; align-items:center; }
+    .scientist-stack { display:grid; gap:1.25rem; }
+    .scientist-examples img { display:block; width:100%; max-width:100%; height:auto; object-fit:contain; }
+
+    .statement.evaluation-heading { width: 100%; max-width: 1500px; font-size: var(--type-title); white-space: nowrap; }
+    .living-points { margin: 0 0 2rem; padding-left: 1.2em; }
+    .living-points li { margin: 0 0 1.25rem; }
+
+    /* Image-led slides use the entire remaining canvas, including upscaling. */
+    .reveal .slides section.media-slide {
+      padding: 64px 56px 36px;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+    .media-slide > .act-header { width: 100%; margin: 0; flex: 0 0 auto; }
+    .media-slide > .statement,
+    .media-slide > .body-copy,
+    .media-slide > .source-link,
+    .media-slide > .inspiration { flex: 0 0 auto; margin-top: 0 !important; margin-bottom: 0 !important; }
+    .media-slide > .image-stage,
+    .media-slide > .image-stage.wide-stage {
+      position: relative;
+      flex: 1 1 0;
+      min-height: 0;
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 0;
+    }
+    .media-slide > .image-stage img {
+      position: absolute;
+      inset: 0 4% 8%;
+      width: 92% !important;
+      height: 92% !important;
+      max-width: 92% !important;
+      max-height: 92% !important;
+      margin: 0;
+      object-fit: contain;
+      object-position: center top;
+    }
+
+    .media-slide > .image-stage img.concurrent-work-image {
+      inset: 0 15% 30%;
+      width: 70% !important;
+      height: 70% !important;
+      max-width: 70% !important;
+      max-height: 70% !important;
+    }
+
+    /* SAI figures are cropped to the chart; frame them as a card that hugs the image. */
+    img.sai-card {
+      box-sizing: border-box;
+      padding: clamp(1.2rem, 2.4vh, 2rem) clamp(1.4rem, 2vw, 2.2rem);
+      background: #fafaf8;
+      border: 1px solid #e6e3de;
+      border-radius: 16px;
+    }
+    .media-slide > .image-stage { align-items: flex-start; }
+    .media-slide > .image-stage img.sai-card {
+      position: static;
+      width: auto !important;
+      height: auto !important;
+      max-width: 92% !important;
+      max-height: 92% !important;
+    }
+
+    /* Image with captions: size the image to its content and center the group. */
+    .reveal .slides section.media-slide.caption-slide,
+    .print-pdf .reveal .slides section.media-slide.caption-slide { justify-content: center !important; }
+    .media-slide.caption-slide > .image-stage { flex: 0 0 auto; }
+    .media-slide.caption-slide > .image-stage img {
+      position: static;
+      width: min(1480px, 92%) !important;
+      height: auto !important;
+      max-width: none !important;
+      max-height: 680px !important;
+      margin: 0 auto;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim-1, .anim-2, .anim-3, .anim-4 {
+      opacity: 0;
+      animation: slideIn .62s cubic-bezier(.22, 1, .36, 1) forwards;
+    }
+    .anim-1 { animation-delay: .08s; }
+    .anim-2 { animation-delay: .23s; }
+    .anim-3 { animation-delay: .38s; }
+    .anim-4 { animation-delay: .53s; }
+
+    .video-print-link {
+      display: none;
+      width: min(1200px,88%);
+      height: 650px;
+      margin: 0 auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: var(--type-detail);
+    }
+    .video-print-link img { width: 100%; height: 580px; object-fit: contain; }
+    @page { size: 1720px 1075px; margin: 0; }
+    /* Fixed slide geometry and visible final states, following infrastructure_pitch.html. */
+    .print-pdf .reveal-viewport,
+    .print-pdf .reveal,
+    .print-pdf .reveal .slides { width: 1720px !important; height: 1075px !important; }
+    .print-pdf .reveal .slides section,
+    .print-pdf .reveal .slides section.present,
+    .print-pdf .reveal .slides section.past,
+    .print-pdf .reveal .slides section.future {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      position: relative !important;
+      padding: var(--slide-pad-y) var(--slide-pad-x) !important;
+      width: 1720px !important;
+      height: 1075px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      top: auto !important;
+      left: auto !important;
+      margin: 0 !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
+    .print-pdf .reveal .slides section.media-slide {
+      justify-content: flex-start !important;
+      padding: 64px 56px 36px !important;
+      gap: 12px;
+    }
+    .print-pdf .reveal .slides { overflow: visible !important; }
+    .print-pdf [class*="anim-"], .print-pdf .fragment {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
+    .print-pdf .video-stage { display: none !important; }
+    .print-pdf .video-print-link { display: flex !important; }
+    .print-pdf .pipeline-shift-slide .dynamic-process { grid-template-columns: 1.25fr .5fr 1.25fr; }
+    .print-pdf .pipeline-shift-slide .dynamic-process .process-box:nth-child(2) {
+      opacity: .62; padding-right:2.2rem; padding-left:2.2rem; font-size:var(--type-detail);
+    }
+    .print-pdf .controls, .print-pdf .progress { display: none !important; }
+    @media print {
+      html, body { margin:0 !important; overflow:visible !important; }
+      * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      html:not(.print-pdf) .reveal,
+      html:not(.print-pdf) .reveal .slides { height:auto !important; position:static !important; transform:none !important; }
+      html:not(.print-pdf) .reveal .slides > section { break-after:page; break-inside:avoid; }
+      html:not(.print-pdf) .reveal .slides > section:last-child { break-after:auto; }
+      .reveal .slide-number { display:none !important; }
+    }
+
+    /* Placeholder for figures still to be added. */
+    .placeholder-stage {
+      flex: 1 1 0;
+      min-height: 0;
+      width: 92%;
+      margin: 0 auto 4%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--border-mid);
+      border-radius: 10px;
+      color: var(--text-faint);
+      font-size: var(--type-body);
+    }
+    .about-list { font-size: var(--type-body); }
+    .about-list li { margin: 1.5rem 0; }
+    .reveal .plain-statement strong { color: inherit; }
+    .tool-links { margin-top: clamp(2.5rem, 5vh, 4rem); display: flex; justify-content: center; gap: clamp(2.5rem, 5vw, 5rem); font-size: var(--type-body); font-weight: 600; }
+    .fp-arrow-label { font-size: var(--type-body); font-weight: 600; vertical-align: middle; }
+
+    /* Research overview: human and AI, applications above, foundations below. Black and gray only. */
+    .research-map { width: min(1640px, 98%); margin: 0 auto; display: grid; gap: clamp(1.2rem, 2.4vh, 2rem); justify-items: center; }
+    .rm-apps { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 2.5vw, 2.5rem); }
+    .rm-box { box-sizing: border-box; padding: 1.2rem 1.5rem 1.4rem; border: 1px solid var(--border-mid); border-radius: 12px; }
+    .rm-box-title { font-size: var(--type-body); font-weight: 700; text-align: center; margin-bottom: .6rem; }
+    .rm-topic { margin-top: .8rem; line-height: 1.3; }
+    .rm-topic-name { font-size: var(--type-detail); font-weight: 600; }
+    .rm-cite { color: var(--text-faint); font-size: 15px; }
+    .rm-cite span { white-space: nowrap; }
+    .rm-cite a { color: inherit; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 2px; }
+    .rm-agents { display: flex; align-items: center; gap: clamp(2rem, 4vw, 4rem); }
+    .rm-agents img { display: block; height: 230px; width: auto; }
+    .rm-arrow { width: 360px; height: 48px; color: var(--text); }
+    .rm-arrow line { stroke: currentColor; stroke-width: 5; }
+    .rm-foundation { width: calc((100% - clamp(1.5rem, 2.5vw, 2.5rem)) / 2); }
+
+  
+.reveal .slides section { padding-bottom:76px; }
+.reveal .slides section.media-slide {padding-bottom:76px;}
+.title-layout h1.hks-title {font-size:86px;line-height:1.04;white-space:normal;letter-spacing:-.04em;}
+.title-sub {font-size:44px;text-align:center;margin-top:30px;line-height:1.25;}
+.hks-copy {width:min(1420px,94%);margin:0 auto;font-size:36px;line-height:1.45;}
+.hks-copy p {margin:0 0 32px;}
+.hks-copy li {margin:24px 0;}
+.hks-copy strong,.statement strong {color:var(--text);}
+.hks-statement {width:min(1430px,94%);margin:0 auto;font-size:68px;line-height:1.2;text-align:center;letter-spacing:-.025em;}
+.hks-stat {font-size:156px;font-weight:700;letter-spacing:-.06em;line-height:1.05;}
+.hks-stat-caption {font-size:42px;line-height:1.35;margin-top:32px;}
+.hks-columns {width:96%;margin:26px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.hks-columns img {width:100%;max-height:640px;object-fit:contain;}
+.hks-columns .hks-copy {width:100%;}
+.hks-triplet {display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;margin:28px auto;width:96%;}
+.hks-triplet figure {margin:0;text-align:center;font-size:30px;}
+.hks-triplet img {width:100%;height:390px;object-fit:contain;display:block;margin:25px auto;}
+.hks-caption {font-size:30px;line-height:1.4;text-align:center;margin:20px auto;}
+.hks-chart {display:block;width:680px;height:540px;object-fit:fill;margin:auto;}
+.hks-chart-labels {width:680px;display:grid;grid-template-columns:repeat(3,1fr);padding-left:67px;box-sizing:border-box;margin:8px auto 0;text-align:center;font-size:26px;line-height:1.2;}
+.hks-table {border-collapse:collapse;width:90%;margin:30px auto;font-size:36px;line-height:1.4;}
+.hks-table th,.hks-table td {padding:26px 24px;border-bottom:1px solid var(--border);text-align:left;}
+.hks-table th {font-weight:600;}
+.hks-table th:last-child,.hks-table td:last-child {text-align:right;}
+.focus-map .rm-topic {opacity:.17;}
+.focus-map .rm-topic.selected {opacity:1;}
+.focus-map .rm-box-title {opacity:.4;}
+.focus-map .rm-agents {opacity:.45;}
+.focus-map .rm-topic.selected .rm-topic-name {font-weight:700;text-decoration:underline;text-underline-offset:6px;}
+.hks-directions {margin:0 auto;width:94%;font-size:36px;line-height:1.35;}
+.hks-directions li {margin:35px 0;padding-left:15px;}
+.hks-directions span {display:block;color:var(--text-mid);margin-top:8px;}
+.hks-footnote {font-size:24px;color:var(--text-mid);line-height:1.35;}
+.hks-web {width:100%;height:470px;object-fit:contain;object-position:center;filter:drop-shadow(0 5px 10px #0002);}
+.reveal .slides section .slide-references {font-size:18px;bottom:24px;}
+@media print { .reveal .slides section .slide-references {bottom:24px;} }
+
+
+
+/* Native text, diagrams, and isolated source figures. */
+.title-sub {font-size:68px;line-height:1.16;margin-top:35px;}
+.title-meta strong {display:inline-block;font-size:48px;line-height:1.25;margin-bottom:12px;}
+.title-bottom {margin-top:62px;}
+.hks-statement {font-size:110px;line-height:1.16;}
+.native-slide .act-header {margin-bottom:38px;}
+.native-slide h2 {font-size:54px;line-height:1.12;text-wrap:balance;}
+.native-columns {display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;margin:15px auto;}
+.native-columns .hks-copy {width:100%;font-size:35px;}
+.native-columns .hks-copy p {margin-bottom:26px;}
+.figure {margin:0;display:flex;flex-direction:column;align-items:center;gap:18px;min-width:0;}
+.figure img {display:block;width:100%;height:600px;max-width:100%;object-fit:contain;}
+.figure figcaption {font-size:27px;line-height:1.25;text-align:center;color:var(--text-mid);}
+.native-slide>.figure img {height:680px;}
+.native-columns .figure img {height:550px;}
+.photo-slide>.figure img {height:660px;}
+.large-statement {font-size:76px;line-height:1.25;max-width:1420px;text-align:center;margin:70px auto;}
+.clinical-note {font-size:40px;line-height:1.5;max-width:1350px;margin:36px auto;border-left:7px solid var(--green);padding-left:40px;}
+.small-note {font-size:27px;line-height:1.35;text-align:center;color:var(--text-mid);margin:24px auto 0;max-width:1400px;}
+.data-table {border-collapse:collapse;width:100%;margin:25px auto;font-size:33px;line-height:1.35;}
+.data-table th,.data-table td {padding:24px 20px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table th {font-weight:600;border-top:2px solid var(--text);border-bottom:2px solid var(--text);}
+.data-table .emphasis {background:#f5e4df;outline:3px solid var(--green);outline-offset:-3px;}
+.features {font-size:31px;}.features td {padding:25px 20px;}
+.features th:last-child,.features td:last-child {text-align:right;}
+.paradox-stat {font-size:150px;font-weight:700;line-height:1.1;text-align:center;color:var(--green);}
+.paradox-stat span {display:block;font-size:34px;line-height:1.35;font-weight:400;color:var(--text);margin-top:20px;}
+.decision-map {display:grid;grid-template-columns:210px 1fr 210px;gap:65px;align-items:center;width:1350px;max-width:100%;margin:35px auto;}
+.decision-map>img {width:210px;height:240px;object-fit:contain;}
+.decision-arrows>div {text-align:center;margin:10px 0 40px;}
+.decision-arrows span {font-size:45px;font-weight:600;}
+.decision-arrows small {display:block;font-size:27px;line-height:1.3;margin-top:13px;}
+.decision-map.understanding .map-shaping,.decision-map.shaping .map-understanding {opacity:.3;}
+.long-arrow {position:relative;display:block;min-width:70px;width:100%;height:4px;background:currentColor;color:var(--green);margin:22px auto;}
+.long-arrow:after {content:'';position:absolute;top:-10px;border-top:12px solid transparent;border-bottom:12px solid transparent;}
+.long-arrow.right:after {right:-1px;border-left:20px solid currentColor;}
+.long-arrow.left:after {left:-1px;border-right:20px solid currentColor;}
+.paper-intro {font-size:30px;line-height:1.45;text-align:center;margin:15px auto 0;}
+.paper-intro strong {font-size:35px;}.paper-intro span {color:var(--text-mid);}
+.map-transition {font-size:42px;text-align:center;margin-top:38px;}
+.oval {border:3px solid var(--text-mid);border-radius:50%;font-size:36px;padding:22px 25px;text-align:center;width:235px;box-sizing:border-box;background:white;}
+.oval.observed {background:#e8e4e0;}
+.fatigue-simple,.fatigue-graph {display:flex;flex-direction:column;align-items:center;margin:25px auto;}
+.vertical-arrow {position:relative;width:3px;height:90px;background:var(--text-mid);margin:0 auto;}
+.vertical-arrow:after {content:'';position:absolute;bottom:0;left:-8px;border-left:10px solid transparent;border-right:10px solid transparent;border-top:18px solid var(--text-mid);}
+.top-causes {display:flex;gap:75px;}.top-causes .oval {width:225px;}
+.converging {display:flex;gap:65px;font-size:88px;line-height:1.1;color:var(--text-mid);}
+.prediction-flow {display:flex;gap:30px;align-items:center;margin:70px auto 60px;}
+.prediction-flow .long-arrow {width:110px;flex-shrink:0;}
+.flow-box {font-size:36px;text-align:center;border-top:3px solid var(--green);border-bottom:3px solid var(--green);padding:35px 10px;flex:1;}
+.flow-box small {font-size:26px;color:var(--text-mid);}
+.equation {font-family:Georgia,serif;font-size:61px;text-align:center;margin:50px auto 15px;line-height:1.5;}
+.equation sub,.equation sup {font-size:.48em;}.fraction {display:inline-flex;flex-direction:column;vertical-align:middle;line-height:1.1;font-size:.7em;}
+.fraction span:first-child {border-bottom:2px solid;padding-bottom:3px;}
+.writing-question {display:flex;align-items:center;gap:50px;margin:65px auto;}
+.writing-question>img {width:200px;height:220px;object-fit:contain;}.writing-question .long-arrow {width:180px;}
+.note-symbol {font-size:42px;border:2px solid var(--border-mid);padding:40px;line-height:1.35;text-align:center;}
+.explanation-chain {display:flex;align-items:center;justify-content:center;gap:35px;margin:45px auto 50px;}
+.explanation-chain img {width:190px;height:200px;object-fit:contain;}.explanation-chain>div:not(.envelope) {width:250px;text-align:center;font-size:30px;}
+.envelope {font-family:Arial,sans-serif;font-size:145px;line-height:1;}
+.human-plus-ai {display:flex;align-items:center;justify-content:center;gap:100px;margin:60px auto;}.human-plus-ai img {height:260px;width:270px;object-fit:contain;}.human-plus-ai span {font-size:100px;}
+.large-caption {font-size:38px;line-height:1.35;text-align:center;margin:30px auto;}
+.author-portraits {display:flex;gap:50px;justify-content:center;margin-top:40px;}.author-portraits img {width:180px;height:180px;object-fit:cover;border-radius:50%;}
+.highlight-xray {position:relative;width:600px;height:510px;margin:auto;}.highlight-xray img {width:100%;height:100%;object-fit:fill;}
+.xray-mark {position:absolute;border:5px dashed var(--green);}.mark-top {left:0;top:0;width:55px;height:140px;}.mark-bottom {left:37%;bottom:0;width:160px;height:80px;}
+.relationship {display:flex;flex-direction:column;align-items:center;gap:25px;font-size:38px;line-height:1.3;}.relationship strong {background:#f5e4df;padding:18px 35px;font-weight:600;}
+.triplet-query {width:420px;margin:0 auto 20px;}.triplet-query .figure img {height:280px;}
+.triplet-refs {display:flex;justify-content:center;gap:150px;}.triplet-refs .figure {width:420px;}.triplet-refs .figure img {height:280px;}
+.triplet-slide .large-caption {margin-top:25px;}.triplet-slide .act-header {margin-bottom:22px;}
+.learning-objectives {display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;text-align:center;margin:35px auto;gap:20px;font-size:35px;}
+.learning-objectives span:not(.objective-plus) {display:block;font-size:27px;color:var(--text-mid);margin-top:20px;}.objective-plus {font-size:65px;}
+.objective-slide>.figure img {height:180px;}
+.support-task {width:1250px;max-width:100%;margin:0 auto;}.support-task .query-xray img {height:245px;}.support-task .query-xray {width:360px;margin:0 auto 24px;}
+.support-choices {display:flex;justify-content:center;gap:140px;}.support-choices .figure {width:450px;}.support-choices .figure img {height:290px;}
+.support-slide .act-header {margin-bottom:25px;}.support-slide .small-note {font-size:25px;}
+.results-slide .native-columns .figure img {height:490px;}.chart-key {font-size:26px;text-align:center;margin-top:25px;}
+.joined-chart {display:flex;width:100%;justify-content:center;gap:5px;height:490px;}.native-columns .joined-chart img {height:490px;width:auto;max-width:68%;object-fit:fill;}.native-columns .joined-chart img:first-child {max-width:31%;}
+
+.native-chart-labels {display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:90%;margin:0 0 6px 10%;font-size:25px;line-height:1.2;text-align:center;}
+.results-slide .figure {gap:13px;}
+.results-slide .native-columns .figure img {height:460px;}
+.joined-chart {height:460px;}
+.native-columns .joined-chart img {height:460px;}
+.results-slide .figure figcaption {font-size:29px;color:var(--text);}
+
+/* Click-driven builds from the physician-fatigue source deck. */
+:root {--ppt-callout:#f8d8c2;--ppt-red:#c00000;}
+.reveal .slides .fragment.ppt-highlight,
+.reveal .slides .fragment.ppt-row-highlight {opacity:1;visibility:visible;transform:none;}
+.reveal .slides .fragment.ppt-highlight {background:transparent;box-shadow:0 0 0 0 transparent;transition:background-color .25s ease,box-shadow .25s ease;}
+.reveal .slides .fragment.ppt-highlight.visible {background:var(--ppt-callout);box-shadow:0 0 0 10px var(--ppt-callout);border-radius:3px;}
+.reveal .slides .fragment.ppt-row-highlight {outline:3px solid transparent;outline-offset:-3px;transition:outline-color .25s ease;}
+.reveal .slides .fragment.ppt-row-highlight.visible {outline-color:var(--ppt-red);}
+.ppt-reveal-callout {background:var(--ppt-callout);padding:15px 20px;border-radius:5px;}
+.hks-stat.ppt-highlight {display:table;margin-left:auto;margin-right:auto;}
+.equation-group .equation {font-size:48px;line-height:1.45;margin:15px auto;}
+.equation-group .small-note {margin-top:14px;}
+.regression-evidence {position:relative;width:1200px;max-width:100%;margin:0 auto;line-height:0;}
+.reveal .slides .regression-evidence>img {width:100%;height:auto!important;object-fit:contain;display:block;}
+.ppt-coefficient-box {position:absolute;box-sizing:border-box;border:3px solid var(--ppt-red);pointer-events:none;}
+.print-pdf .fragment.ppt-highlight {background:var(--ppt-callout)!important;box-shadow:0 0 0 10px var(--ppt-callout)!important;border-radius:3px;}
+.print-pdf .fragment.ppt-row-highlight {outline-color:var(--ppt-red)!important;}
+@media print {
+ .fragment.ppt-highlight {background:var(--ppt-callout)!important;box-shadow:0 0 0 10px var(--ppt-callout)!important;}
+ .fragment.ppt-row-highlight {outline-color:var(--ppt-red)!important;}
+ .ppt-coefficient-box {opacity:1!important;visibility:visible!important;}
+}
+@media (prefers-reduced-motion:reduce) {
+ .reveal .slides .fragment {transition:none!important;}
+}
+.regression-evidence.hospital-evidence {width:908px;}
+</style><link rel="stylesheet" href="resources/typography.css"><style>
+/* Revisions from talk.md comments. */
+.map-focus {position:absolute;width:0;height:0;overflow:hidden;}
+.reveal .slides .decision-map.focus-understanding:has(.map-focus.visible) .map-shaping>*,
+.reveal .slides .decision-map.focus-shaping .map-understanding>* {opacity:.28;transition:opacity .4s ease;}
+.print-pdf .decision-map.focus-understanding .map-shaping>* {opacity:.28;}
+@media print {.decision-map.focus-understanding .map-shaping>* {opacity:.28;}}
+.decision-map.focus-understanding:has(.map-focus.visible) .map-understanding .map-label,.print-pdf .decision-map.focus-understanding .map-understanding .map-label,
+.decision-map.focus-shaping .map-shaping .map-label {font-weight:600;}
+.question-block {width:fit-content;margin:0 auto;}.question-block .display-question {margin:0;}
+.contribution-note {width:0;min-width:100%;font-size:40px;line-height:1.4;color:var(--text-mid);margin:70px 0 0;text-align:left;}
+.inline-cite {font-size:24px;font-weight:400;color:var(--text-mid);white-space:normal;}
+.plain-flow .long-arrow {color:var(--text-mid);height:3px;}
+.plain-flow .note-symbol {border:0;padding:0;}
+.reveal .slides div.clinical-note {border-left:0;padding-left:0;}
+.fatigue-diagram-slide .native-columns {grid-template-columns:600px minmax(0,1fr);}
+.arrow-gap {height:90px;}
+.one-line {white-space:nowrap;}
+.oval {display:flex;align-items:center;justify-content:center;line-height:1.2;}
+.top-causes {gap:90px;}.top-causes .oval {width:250px;padding:22px 14px;}
+svg.converging {display:block;margin:6px auto 0;gap:0;font-size:0;}
+.table-steps {position:relative;line-height:0;margin:0 auto;}
+.table-steps>img+img {position:absolute;left:0;top:0;}
+.reveal .slides .yield-slide .native-columns {grid-template-columns:auto minmax(0,1fr);gap:90px;}
+.feature-tour .small-note {margin-top:18px;}
+.race-slide .native-columns {grid-template-columns:minmax(0,1fr) auto;gap:80px;}
+.muted-copy {color:var(--text-mid);}
+.features-slide .native-columns {grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;}
+.features-slide .equation-group .equation {font-size:56px;}
+.question-block {width:1460px;max-width:100%;}
+.reveal .slides .question-block .contribution-note {width:auto;min-width:0;}
+.labeled-arrow {display:flex;flex-direction:column;align-items:center;width:560px;}
+.writing-question .labeled-arrow .long-arrow {width:100%;}
+.labeled-arrow .note-symbol {font-size:40px;}
+.sanity-statement {font-size:34px;line-height:1.4;margin-top:50px;}
+.hypothesis-line {font-size:36px;line-height:1.4;margin:0 0 20px;}
+.reveal .slides .table-steps {height:auto;}
+.reveal .slides .table-steps>img {width:100%;height:auto;}
+.reveal .slides img.table-figure {display:block;height:auto;max-width:none;margin:10px auto;}
+.caption-stack {display:grid;margin-top:26px;font-size:36px;line-height:1.35;text-align:center;}
+.caption-stack>p {grid-area:1/1;margin:0;}
+.print-pdf .caption-stack .fade-in-then-out {display:none;}
+@media print {.caption-stack .fade-in-then-out {display:none;}}
+.persona-icon {display:block;width:150px;height:150px;object-fit:contain;margin:0 0 30px;}
+.key-assumption {font-size:38px;line-height:1.4;text-align:center;margin:30px auto 0;background:var(--ppt-callout);padding:15px 24px;border-radius:5px;width:fit-content;max-width:1500px;}
+.accuracy-slide .hks-columns {grid-template-columns:680px minmax(0,1fr);gap:40px;}
+.accuracy-slide .hks-copy {font-size:35px;}
+.closing-overview .rm-agents img {height:150px;}
+.closing-overview .research-map {gap:14px;}
+.closing-contact {margin-top:34px;text-align:center;font-size:46px;line-height:1.3;}
+.closing-contact a {color:inherit;text-decoration:none;}
+.reveal .slides div.clinical-note {max-width:1300px;}
+.fatigue-diagram-slide .native-columns {grid-template-columns:590px minmax(0,1fr);gap:36px;}
+.one-line-callout {white-space:nowrap;width:fit-content;}
+.sanity-statement.ppt-reveal-callout {padding:15px 20px;}
+.table-left-slide .native-columns {grid-template-columns:auto minmax(0,1fr);gap:80px;align-items:center;}
+.table-left-slide .hks-copy {font-size:36px;}
+.table-left-slide .table-steps {margin:0;}
+.xray-caption {font-size:32px;text-align:center;margin-top:20px;}
+.reveal .slides .support-slide .figure figcaption,.reveal .slides .native-slide .figure figcaption {font-size:32px;color:var(--text);line-height:1.3;}
+.reveal .slides .support-slide .small-note,.reveal .slides .key-assumption {font-size:40px;line-height:1.4;color:var(--text);}
+.reveal .slides .chart-key,.reveal .slides .native-chart-labels {font-size:28px;color:var(--text);}
+.right-stack {display:grid;align-items:center;}
+.right-stack>* {grid-area:1/1;}
+.accuracy-stats {font-size:34px;line-height:1.4;white-space:nowrap;}
+.accuracy-stats p {margin:0 0 30px;}
+.print-pdf .accuracy-stats {display:none;}
+@media print {.accuracy-stats {display:none;}}
+.reveal .slides p.ppt-reveal-callout.centered-callout {width:fit-content;margin-left:auto;margin-right:auto;}
+.incident-image {display:block;width:1150px;margin:10px auto 34px;}
+</style></head><body><div class="reveal"><div class="slides"><section data-title="Towards Human-centered AI"><div class="title-layout"><h1 class="anim-1 hks-title">Towards Human-centered AI</h1><div class="title-sub">Understanding and Shaping<br>Human Decisions with AI</div><div class="title-bottom anim-2"><div class="title-meta"><strong>Chenhao Tan</strong><br>Chicago Human+AI Lab<br><a href="https://chenhaot.com">chenhaot.com</a><br>chenhao@uchicago.edu, @ChenhaoTan</div><div class="title-logos"><div class="title-logo"><img src="resources/chai.jpg" alt="Chicago Human+AI Lab"></div></div></div></div><aside class="notes">Policy outcomes hinge on the decisions people make.</aside></section>
+<section data-title="An Overview of My Research"><div class="research-map"><div class="rm-apps fragment fade-in" data-fragment-index="1"><div class="rm-box"><div class="rm-box-title">Decision Making</div><div class="rm-topic"><span class="rm-topic-name">Healthcare</span> <span class="rm-cite">(e.g., <span>Nature Communications 2025</span>, <span>FAccT 2025</span>, <span>ML4H 2023</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Persuasion</span> <span class="rm-cite">(e.g., <span>ACL 2023</span>, <span>TACL 2019</span>, <span>WWW 2016</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Political communication</span> <span class="rm-cite">(e.g., <span>PNAS Nexus 2024</span>, <span>Findings of EMNLP 2023</span>, <span>ICWSM 2016</span>)</span></div></div><div class="rm-box"><div class="rm-box-title">Scientific Discovery</div><div class="rm-topic"><span class="rm-topic-name">AI scientists</span> <span class="rm-cite">(e.g., <span><a href="https://github.com/ChicagoHAI/neurico" target="_blank" rel="noopener">NeuriCo</a></span>, <span><a href="https://arxiv.org/abs/2607.02931v1" target="_blank" rel="noopener">VERITAS</a></span>, <span>ACL 2025</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Interdisciplinary collaboration (sciences, social sciences)</span> <span class="rm-cite">(e.g., <span><a href="https://livingscience.ai" target="_blank" rel="noopener">LivingScience</a></span>, <span><a href="https://www.youtube.com/watch?v=qiRSwn0fn04" target="_blank" rel="noopener">NeuriCo-battery</a></span>, <span><a href="https://virtualcellchallenge.org" target="_blank" rel="noopener">Virtual Cell Challenge</a></span>, <span>ICML Workshop 2026</span>)</span></div></div></div><div class="rm-agents anim-1"><img src="resources/human.png" alt="Human"><svg class="rm-arrow" viewbox="0 0 300 40" aria-hidden="true"><defs><marker id="rm-head" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"></path></marker></defs><line x1="15" y1="20" x2="285" y2="20" marker-start="url(#rm-head)" marker-end="url(#rm-head)"></line></svg><img src="resources/ai.png" alt="AI"></div><div class="rm-box rm-foundation fragment fade-in" data-fragment-index="1"><div class="rm-box-title">Understanding and Improving AI</div><div><div class="rm-topic"><span class="rm-topic-name">Causal reasoning</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026a</span>, <span>ICLR 2026</span>, <span>TMLR 2024</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Interpretability/explanations</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026b</span>, <span>TMLR 2023</span>, <span>FAccT 2020</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">AI alignment/safety</span> <span class="rm-cite">(e.g., <span>ICML 2026</span>, <span>EMNLP 2026</span>, <span>NeurIPS 2025</span>)</span></div></div></div></div></section>
+<section data-title="Today: Healthcare and Explanations"><div class="research-map focus-map"><div class="rm-apps" data-fragment-index="1"><div class="rm-box"><div class="rm-box-title">Decision Making</div><div class="rm-topic selected"><span class="rm-topic-name">Healthcare</span> <span class="rm-cite">(e.g., <span>Nature Communications 2025</span>, <span>FAccT 2025</span>, <span>ML4H 2023</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Persuasion</span> <span class="rm-cite">(e.g., <span>ACL 2023</span>, <span>TACL 2019</span>, <span>WWW 2016</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Political communication</span> <span class="rm-cite">(e.g., <span>PNAS Nexus 2024</span>, <span>Findings of EMNLP 2023</span>, <span>ICWSM 2016</span>)</span></div></div><div class="rm-box"><div class="rm-box-title">Scientific Discovery</div><div class="rm-topic"><span class="rm-topic-name">AI scientists</span> <span class="rm-cite">(e.g., <span><a href="https://github.com/ChicagoHAI/neurico" target="_blank" rel="noopener">NeuriCo</a></span>, <span><a href="https://arxiv.org/abs/2607.02931v1" target="_blank" rel="noopener">VERITAS</a></span>, <span>ACL 2025</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Interdisciplinary collaboration (sciences, social sciences)</span> <span class="rm-cite">(e.g., <span><a href="https://livingscience.ai" target="_blank" rel="noopener">LivingScience</a></span>, <span><a href="https://www.youtube.com/watch?v=qiRSwn0fn04" target="_blank" rel="noopener">NeuriCo-battery</a></span>, <span><a href="https://virtualcellchallenge.org" target="_blank" rel="noopener">Virtual Cell Challenge</a></span>, <span>ICML Workshop 2026</span>)</span></div></div></div><div class="rm-agents anim-1"><img src="resources/human.png" alt="Human"><svg class="rm-arrow" viewbox="0 0 300 40" aria-hidden="true"><defs><marker id="rm-head" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"></path></marker></defs><line x1="15" y1="20" x2="285" y2="20" marker-start="url(#rm-head)" marker-end="url(#rm-head)"></line></svg><img src="resources/ai.png" alt="AI"></div><div class="rm-box rm-foundation" data-fragment-index="1"><div class="rm-box-title">Understanding and Improving AI</div><div><div class="rm-topic"><span class="rm-topic-name">Causal reasoning</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026a</span>, <span>ICLR 2026</span>, <span>TMLR 2024</span>)</span></div><div class="rm-topic selected"><span class="rm-topic-name">Interpretability/explanations</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026b</span>, <span>TMLR 2023</span>, <span>FAccT 2020</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">AI alignment/safety</span> <span class="rm-cite">(e.g., <span>ICML 2026</span>, <span>EMNLP 2026</span>, <span>NeurIPS 2025</span>)</span></div></div></div></div></section>
+<section data-title="Policy outcomes hinge on human decisions"><div class="hks-statement">Policy outcomes hinge on<br><strong>human decisions</strong></div><aside class="notes">A policy takes effect through many individual choices. A physician decides whom to test. A voter decides how to interpret a ballot measure. AI can help us study these decisions and change the information people use.</aside></section>
+<section class="native-slide roadmap-slide" data-title="Understanding human decisions · Shaping human decisions" data-builds='["Highlight understanding and dim shaping."]'><div class="decision-map revised-map focus-understanding"><img class="person-icon" src="resources/human.png" alt="Human"><div class="decision-arrows"><div class="map-understanding"><span class="map-label">Understanding human decisions</span><div class="long-arrow right"></div><div class="arrow-citation">Chao-Chun Hsu, Ziad Obermeyer, Chenhao Tan<br>Nature Communications, 2025</div></div><div class="map-shaping"><span class="map-label">Shaping human decisions</span><div class="long-arrow left"></div><div class="arrow-citation">Chacha Chen, Shi Feng, Amit Sharma, Chenhao Tan · TMLR / FAccT 2023<br>Han Liu et al. · ICLR 2023</div></div></div><img class="ai-icon" src="resources/ai.png" alt="AI"><span class="fragment map-focus" data-fragment-index="0" aria-hidden="true"></span></div><aside class="notes">AI uses the record of human decisions to understand the conditions under which people decide. AI assistance can then shape the information people use. Highlight understanding before beginning the physician study. The published paper is titled A machine learning model using clinical notes to identify physician fatigue.</aside></section>
+<section data-title="Decision of Interest in Emergency Care"><div class="act-header"><h2>Decision of Interest in Emergency Care</h2></div><div class="native-columns"><div><div class="hks-copy"><p>A patient arrives with chest pain.</p><p>The physician must decide whether to order further testing for acute coronary syndromes (“heart attack”).</p><p>Testing low-risk patients can impose costs and risks with little clinical benefit.</p></div></div><div><figure class="clinical-decision-figure"><div class="patient-node"><img src="resources/human.png" alt="Patient"><span>Chest pain</span></div><div class="vertical-arrow"></div><div class="clinical-question">Order further testing?</div><div class="clinical-branches"><div><span class="branch-stem"></span><strong>Test</strong><span>Diagnostic information<br>Costs and risks</span></div><div><span class="branch-stem"></span><strong>No further testing</strong><span>Missing potential<br>failure cases</span></div></div></figure></div></div><aside class="notes">Motivate the choice before discussing the fatigue measure. Testing yield is the fraction of assigned tests that are positive. It captures one dimension of decision quality, not every clinical outcome.</aside></section>
+<section class="native-slide question-slide" data-title="Does physician fatigue relate to decision quality?" data-builds='["Reveal the key contribution."]'><div class="question-block"><p class="display-question">Does <em>physician fatigue</em> relate to<br>decision quality?</p><p class="contribution-note fragment fade-in" data-fragment-index="0">Our key contribution is to propose a new measurement of fatigue and connect the measured fatigue with decision quality.</p></div></section>
+<section class="native-slide " data-title="The Paradox of Physician Fatigue" data-source="physician_fatigue.pptx#13"><div class="act-header"><h2>The Paradox of Physician Fatigue</h2></div><ul class="prose-bullets "><li><strong>Physician burnout is prevalent.</strong><ul><li>In a 2022 report, 65% of emergency physicians reported burnout, the highest rate of any medical specialty. <span class="inline-cite">(Carbajal 2022)</span></li></ul></li><li><strong>Earlier research found limited evidence connecting fatigue with real patient outcomes.</strong> <span class="inline-cite">(Arnedt et al. 2005; Ayas et al. 2006; Barger et al. 2006; Johns et al. 2009; Landrigan et al. 2004; Lockley et al. 2004)</span></li><li>One possible reason: studies used coarse measures related to workload.</li></ul><aside class="notes">This is the motivation in the supplied study slides. Burnout and fatigue are related but distinct concepts. The 65% figure is a historical 2022 report, not a current prevalence estimate.</aside></section>
+<section class="native-slide " data-title="Can we learn about physician fatigue from clinical notes?"><div class="act-header"><h2>Can we learn about physician fatigue from clinical notes?</h2></div><div class="writing-question plain-flow"><img class="" src="resources/human.png" alt="Human"><div class="labeled-arrow"><div class="note-symbol">Clinical notes</div><div class="long-arrow right"></div></div><img class="" src="resources/ai.png" alt="AI"></div><aside class="notes">The note records the patient encounter and may also reveal something about the person making the decision.</aside></section>
+<section class="native-slide " data-title="Example clinical notes" data-source="physician_fatigue.pptx#5"><div class="act-header"><h2>Example clinical notes</h2></div><div class="clinical-note">Chenhao is a 34-year-old male who presents with a chief complaint of chest pain for the past 3 days. The pain is described as a dull, pressure-like sensation located in the mid-sternal area, radiating to the left shoulder and arm. It is rated as 6/10 in intensity and worsens with physical activity, such as climbing stairs, but improves with rest. He denies any recent trauma to the chest.</div><aside class="notes">Fictional clinical note used to illustrate the record of a physician–patient encounter.</aside></section>
+<section class="native-slide fatigue-diagram-slide" data-title="Intuitively, workload should not affect clinical notes in the ideal world" data-source="physician_fatigue.pptx#17"><div class="act-header"><h2>Intuitively, workload should not affect clinical notes in the ideal world</h2></div><div class="native-columns"><div><div class="fatigue-simple"><div class="oval">Fatigue</div><div class="arrow-gap"></div><div class="oval observed">Clinical notes</div></div></div><div></div></div><aside class="notes">The measurement assumption concerns patient characteristics: prior workload should not systematically change which patients a physician sees. Workload can affect how a physician writes through fatigue.</aside></section>
+<section class="native-slide fatigue-diagram-slide" data-title="However, physicians do get tired" data-source="physician_fatigue.pptx#19" data-builds='["Reveal the missing-ground-truth challenge after the fatigue-to-notes diagram."]'><div class="act-header"><h2>However, physicians do get tired</h2></div><div class="native-columns"><div><div class="fatigue-simple"><div class="oval">Fatigue</div><div class="vertical-arrow"></div><div class="oval observed">Clinical notes</div></div></div><div><div class="hks-copy"><p class="one-line">Fatigue may affect the notes physicians write.</p><p class="fragment fade-in" data-fragment-index="0">The challenge: we do not have ground-truth measurements of physician fatigue.</p></div></div></div></section>
+<section class="native-slide fatigue-diagram-slide" data-title="From Workload to a Note-Based Fatigue Measure" data-source="physician_fatigue.pptx#21" data-builds='["Add workload and other shocks as causes of fatigue, with the measurement assumption.", "Reveal the training step, highlighted in peach, and what its predictions capture."]'><div class="act-header"><h2>From Workload to a Note-Based Fatigue Measure</h2></div><div class="native-columns"><div><div class="fatigue-graph"><div class="top-causes fragment fade-in" data-fragment-index="0"><div class="oval observed">Workload</div><div class="oval">Other shocks</div></div><svg class="converging fragment fade-in" data-fragment-index="0" viewBox="0 0 590 90" width="590" height="90" aria-hidden="true"><defs><marker id="converge-head" viewBox="0 0 20 20" refX="18" refY="10" markerWidth="20" markerHeight="20" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,1 L20,10 L0,19 z" fill="#625e59"/></marker></defs><line x1="125" y1="0" x2="262" y2="86" stroke="#625e59" stroke-width="3" marker-end="url(#converge-head)"/><line x1="465" y1="0" x2="328" y2="86" stroke="#625e59" stroke-width="3" marker-end="url(#converge-head)"/></svg><div class="oval">Fatigue</div><div class="vertical-arrow"></div><div class="oval observed">Clinical notes</div></div></div><div><div class="hks-copy"><p class="fragment fade-in" data-fragment-index="0"><strong>Assumption:</strong> workload affects notes through physician fatigue.</p><p class="fragment fade-in ppt-reveal-callout one-line-callout" data-fragment-index="1">Train a model to predict prior workload from a note.</p><p class="fragment fade-in" data-fragment-index="1">Its predictions will capture fatigue, including those caused by other shocks (see proof in the paper).</p></div></div></div><aside class="notes">This exclusion assumption is needed to interpret the score as fatigue. The score remains a proxy and may capture other properties of documentation.</aside></section>
+<section class="native-slide " data-title="Data and Prediction Task"><div class="act-header"><h2>Data and Prediction Task</h2></div><div class="native-columns"><div><div class="hks-copy"><p><strong>129,228</strong> emergency department encounters</p><p><strong>60 physicians</strong> working <strong>11,592 shifts</strong></p><p>Predict high versus low prior workload using the text of a clinical note.</p></div></div><div><figure class="figure"><img class="" src="resources/fatigue_data.png" alt="Distribution of days worked in the past week"><figcaption>Prior workload in the supplied study slides</figcaption></figure></div></div><aside class="notes">The published study describes 2010–2012 at a single academic center. The supplied earlier slides describe a longer period. High workload means at least four prior workdays; low workload means the first workday in seven days. The workload distribution is from the supplied study slides.</aside></section>
+<section class="native-slide cohort-task" data-title="Data and Prediction Task" data-source="physician_fatigue.pptx#26" data-builds='["Reveal the sanity check: patient characteristics do not differ with prior workload."]'><div class="act-header"><h2>Data and Prediction Task</h2></div><div class="native-columns"><div><ul class="prose-bullets "><li><strong>X:</strong> a clinical note</li><li><strong>Y:</strong> high versus low prior workload</li></ul><p class="sanity-statement fragment fade-in ppt-reveal-callout" data-fragment-index="0"><strong>Sanity check:</strong> patient characteristics do not differ with prior workload.</p></div><div><figure class="figure"><img src="resources/figure-fatigue-26-0.png" alt="Study cohort and patient-level train/test split"></figure></div></div><aside class="notes">Patient-level train/test splitting keeps repeat visits by the same patient together. Workload is a training label; it is not a direct fatigue measurement. The balance checks on patient demographics and chief complaints are in the backup slides.</aside></section>
+<section class="native-slide features-slide" data-title="Features" data-source="physician_fatigue.pptx#31-32"><div class="act-header"><h2>Features</h2></div><div class="native-columns"><ul class="prose-bullets "><li><strong>Note length</strong></li><li><strong>Note predictability:</strong> average negative log probability from fine-tuned GPT-2</li><li><strong>Note readability</strong></li><li><strong>Lexicon counts:</strong> pronouns, affect, and cognitive processes (LIWC)</li><li><strong>Clinical language:</strong> medical words from SNOMED and stopwords</li></ul><div class="equation-group"><div class="equation" aria-label="The probability of a note is the product of the conditional probabilities of its words.">p(w<sub>1</sub>, …, w<sub>N</sub>) = ∏<sub>t=1</sub><sup>N</sup> p(w<sub>t</sub> | w<sub>&lt;t</sub>)</div><div class="equation" aria-label="Average negative log probability: minus one over N times the sum of log p of each word given preceding words.">− <span class="fraction"><span>1</span><span>N</span></span> ∑<sub>t=1</sub><sup>N</sup> log p(w<sub>t</sub> | w<sub>&lt;t</sub>)</div><p class="small-note">Average negative log probability (log perplexity)</p></div></div><aside class="notes">GPT-2 is fine-tuned on training notes. Higher log perplexity means less predictable text. The supplied slides use inconsistent sign conventions in their descriptions; this deck uses log perplexity throughout.</aside></section>
+<section data-builds='["Reveal the peach reminder that predicting workload is only a step toward measuring fatigue."]' data-title="Notes Predict Prior Workload"><div class="act-header"><h2>Notes Predict Prior Workload</h2></div><img class="table-figure" style="width:823px" src="resources/table-auc.png" alt="AUC-ROC for predicting prior workload: chief complaint baseline 50.0%, zero-shot Vicuna-7B 53.2%, clinical note features 60.1%"><div class="hks-copy"><p class="fragment fade-in ppt-reveal-callout" data-fragment-index="0">Predicting workload is the starting point for validating the fatigue measure.</p></div><aside class="notes">Chance AUC is 50%. These are workload-prediction results, not diagnostic accuracy for clinical fatigue.</aside></section>
+<section class="native-slide " data-title="Other Measures of Fatigue" data-source="physician_fatigue.pptx#36"><div class="act-header"><h2>Other Measures of Fatigue</h2></div><p class="hypothesis-line"><strong>Hypothesis:</strong> if notes capture fatigue, predicted fatigue should also track other measures of fatigue.</p><table class="data-table "><thead><tr><th>Measure</th><th>Definition</th></tr></thead><tbody><tr><td>Overnight shift</td><td>Patient arrives between 1:00 a.m. and 5:59 a.m.</td></tr><tr><td>Circadian disruption</td><td>Variance of physician shift start times over the week</td></tr><tr><td>Patients seen prior</td><td>Order of the physician encounter within a shift</td></tr></tbody></table><aside class="notes">These measures are used for validation beyond the workload training label.</aside></section>
+<section class="native-slide " data-title="Predicted Fatigue Correlates with Other Fatigue Measures" data-source="physician_fatigue.pptx#37" data-builds='["Draw the red box around the fatigue coefficients for the four hospital-dataset validations."]'><div class="act-header"><h2>Predicted Fatigue Correlates with Other Fatigue Measures</h2></div><figure class="figure "><div class="table-steps" style="width:941px"><img src="resources/table-fatigue-hospital.png" alt="Published Table 1, columns 1 to 4: predicted fatigue is associated with workload 0.384 (0.087), overnight shift 0.041 (0.018), variation in shift start time 5.606 (2.265), and patients seen prior 1.073 (0.298)"><img class="fragment fade-in" data-fragment-index="0" src="resources/table-fatigue-hospital-1.png" alt="" aria-hidden="true"></div></figure><aside class="notes">Published Table 1, internal hold-out set (n = 34,175). These are associations and proxy predictions.</aside></section>
+<section class="media-slide" data-title="Predicted Fatigue Rises Overnight"><div class="act-header"><h2>Predicted Fatigue Rises Overnight</h2></div><div class="image-stage"><img src="resources/fatigue-published-overnight.png" alt="Predicted fatigue rises across overnight hours, compared with other shifts. Error bars show uncertainty."></div><aside class="notes">The model never trained on overnight-shift labels. The published figure shows predictions rising across the overnight shift. Other checks include patients seen earlier in a shift, variation in shift start times, and external validation in MIMIC-III.</aside></section>
+<section class="native-slide " data-title="External Validation on MIMIC-III" data-source="physician_fatigue.pptx#39" data-builds='["Draw the red box around the external MIMIC-III overnight-shift coefficient."]'><div class="act-header"><h2>External Validation on MIMIC-III</h2></div><figure class="figure "><div class="table-steps" style="width:1146px"><img src="resources/table-fatigue-mimic.png" alt="Published Table 1 with external validation: in MIMIC-III, predicted fatigue is associated with the overnight shift, 0.364 (0.162)"><img class="fragment fade-in" data-fragment-index="0" src="resources/table-fatigue-mimic-1.png" alt="" aria-hidden="true"></div></figure><aside class="notes">The final column is external validation. The overnight association extends to MIMIC-III (n = 1,216). The score is not a clinical fatigue diagnosis.</aside></section>
+<section data-title="Fatigue and Testing Decisions"><div class="act-header"><h2>Fatigue and Testing Decisions</h2></div><div class="hks-copy"><p>Decision: whether to test for acute coronary syndromes</p><p>Outcome: the fraction of tests that are positive</p><p>Compare this measure of decision quality with note-based fatigue and with prior workload.</p></div><aside class="notes">A lower positive rate can mean testing more low-risk patients. Yield is one measure of decision quality and cannot capture every benefit or harm of testing. The regression adjusts for patient, physician, and time factors.</aside></section>
+<section data-builds='["Outline the workload coefficient: prior workload alone shows no relationship with testing yield.", "Outline the predicted-fatigue coefficient and reveal the 19% result."]' data-title="Predicted Fatigue and Testing Yield" class="native-slide yield-slide table-left-slide"><div class="act-header"><h2>Predicted Fatigue and Testing Yield</h2></div><div class="native-columns"><div><div class="table-steps" style="width:825px"><img src="resources/table-yield.png" alt="Published Table 2: effect of workload on yield of testing −0.0081 (0.009); effect of predicted fatigue −0.2935 (0.147), p &lt; 0.05; n = 1,017"><img class="fragment fade-in-then-out" data-fragment-index="0" src="resources/table-yield-1.png" alt="" aria-hidden="true"><img class="fragment fade-in" data-fragment-index="1" src="resources/table-yield-2.png" alt="" aria-hidden="true"></div></div><div class="hks-copy"><p class="fragment fade-in-then-semi-out" data-fragment-index="0">Prior workload alone: no detectable relationship with testing yield.</p><p class="fragment fade-in" data-fragment-index="1"><strong>19%</strong> lower testing yield for each one standard deviation increase in predicted fatigue</p></div></div><aside class="notes">Testing yield is 19.0% lower per standard deviation of predicted fatigue. Prior workload itself has a small, statistically insignificant association. The result does not establish that intervening on the score would cause better outcomes.</aside></section>
+<section class="native-slide race-slide table-left-slide" data-title="Fatigue Scores and Patient Race" data-builds='["Outline the workload coefficients: prior workload does not differ by patient race.", "Outline the predicted-fatigue coefficients: notes about Black and Hispanic patients show higher predicted fatigue."]'><div class="act-header"><h2>Fatigue Scores and Patient Race</h2></div><div class="native-columns"><div class="table-steps" style="width:717px"><img src="resources/table-race.png" alt="Regression of prior workload and predicted fatigue on patient race, sex, and age. Predicted fatigue versus White patients: Black 0.0112 (0.001), Hispanic 0.0192 (0.001), Other 0.0086 (0.002), all p &lt; 0.001. Prior workload: Black −0.0009 (0.017), Hispanic −0.0125 (0.018), Other −0.0213 (0.027), none significant."><img class="fragment fade-in-then-out" data-fragment-index="0" src="resources/table-race-1.png" alt="" aria-hidden="true"><img class="fragment fade-in" data-fragment-index="1" src="resources/table-race-2.png" alt="" aria-hidden="true"></div><div class="hks-copy"><p class="fragment fade-in-then-semi-out" data-fragment-index="0">Prior workload does not differ by patient race.</p><p class="fragment fade-in" data-fragment-index="1">Notes about Black and Hispanic patients show higher predicted fatigue than notes about White patients.</p></div></div><aside class="notes">This exploratory analysis appears in the 2023 preprint, rather than the published Nature Communications paper. It cannot distinguish clinician fatigue, bias in documentation, patient differences, or measurement bias, and it does not imply that patient race causes fatigue. The table shows the race coefficients from the supplied study slides. Standard errors for predicted fatigue: Black 0.001, Hispanic 0.001, Other 0.002. Standard errors for prior workload: 0.017, 0.018, 0.027. Models include sex, age, physician, chief complaints, and time controls.</aside></section>
+<section class="native-slide feature-tour table-left-slide" data-title="What Changes in the Notes?" data-source="physician_fatigue.pptx#46" data-builds='["Outline word unpredictability and explain that notes become more predictable.", "Move the outline to cognitive words and explain fewer insight words and more certainty words.", "Point to more findings in the paper."]'><div class="act-header"><h2>What Changes in the Notes?</h2></div><div class="native-columns"><div class="table-steps" style="width:801px"><img src="resources/table-features.png" alt="Published Table 3: correlations with physician workload; perplexity (log) −0.092; insight −0.09; certainty 0.075; first person singular pronouns −0.07; impersonal pronouns −0.049; anger 0.025; Flesch-Kincaid grade −0.05; all p &lt; 0.001"><img class="fragment fade-in-then-out" data-fragment-index="0" src="resources/table-features-1.png" alt="" aria-hidden="true"><img class="fragment fade-in" data-fragment-index="1" src="resources/table-features-2.png" alt="" aria-hidden="true"></div><div class="hks-copy"><p class="fragment fade-in" data-fragment-index="0">Notes written after heavier workload are more predictable.</p><p class="fragment fade-in" data-fragment-index="1">They use fewer insight words (“think,” “explain”) and more certainty words (“clear,” “never”).</p><p class="fragment fade-in" data-fragment-index="2">More findings in the paper.</p></div></div><aside class="notes">Earlier feature correlations with workload: notes become more predictable, contain more certainty and fewer insight words, and contain more anger words. These associations do not establish an individual physician’s fatigue or emotional state. More certain language does not imply more accurate judgment.</aside></section>
+<section class="native-slide " data-title="What Happens When AI Writes the Notes?" data-source="physician_fatigue.pptx#51" data-builds='["Reveal the implication, highlighted in peach."]'><div class="act-header"><h2>What Happens When AI Writes the Notes?</h2></div><div class="native-columns"><div><div class="hks-copy"><p class="">LLM-generated text is predictable and may receive a high “fatigue” score.</p></div></div><div><img class="table-figure" style="width:768px" src="resources/table-ai-notes.png" alt="Fatigue score deviation from mean: greedy generation +189%, sampled generation +8%, original History of Present Illness −66%"></div></div><p class="closing-implication fragment fade-in ppt-reveal-callout" data-fragment-index="0">Automatically generated notes can erase signals from human writing.</p><aside class="notes">Earlier exploratory analysis. The original slide describes differences of 75 or 250 percentage points. These are differences in model scores for generated versus original text; generated text does not experience fatigue. Applying a model trained on human-written notes to generated text changes the data-generating process.</aside></section>
+<section class="native-slide " data-title="Integrating AI into Note Generation" data-source="physician_fatigue.pptx#55"><div class="act-header"><h2>Integrating AI into Note Generation</h2></div><div class="hks-copy"><p>Separate the different goals of note writing.</p><p>Design AI to help physicians provide better care.</p><p>Help physicians identify valuable information to ask for during an encounter.</p></div><aside class="notes">These are proposed design directions, not evaluated interventions in the fatigue study.</aside></section>
+<section class="native-slide roadmap-slide" data-title="Understanding human decisions · Shaping human decisions"><div class="decision-map revised-map focus-shaping"><img class="person-icon" src="resources/human.png" alt="Human"><div class="decision-arrows"><div class="map-understanding"><span class="map-label">Understanding human decisions</span><div class="long-arrow right"></div><div class="arrow-citation">Chao-Chun Hsu, Ziad Obermeyer, Chenhao Tan<br>Nature Communications, 2025</div></div><div class="map-shaping"><span class="map-label">Shaping human decisions</span><div class="long-arrow left"></div><div class="arrow-citation">Chacha Chen, Shi Feng, Amit Sharma, Chenhao Tan · TMLR / FAccT 2023<br>Han Liu et al. · ICLR 2023</div></div></div><img class="ai-icon" src="resources/ai.png" alt="AI"></div><aside class="notes">Return to the opening diagram and highlight shaping. The next question is how AI can help people make better decisions.</aside></section>
+<section class="native-slide " data-title="Explanations Need to Activate Task-Specific Intuitions" data-source="hcai.pptx#58"><div class="act-header"><h2>Explanations Need to Activate Task-Specific Intuitions</h2></div><div class="native-columns"><div><figure class="figure "><img class="" src="resources/figure-hcai-58-2.png" alt="Pathway from an explanation to human understanding of the model"><figcaption>Understanding model behavior</figcaption></figure></div><div><figure class="figure "><img class="" src="resources/figure-hcai-58-0.png" alt="An example pathway connecting task knowledge to interpretation"><figcaption>Connecting to the task</figcaption></figure></div></div><aside class="notes">These are extracted diagram figures, not slide screenshots. The framework distinguishes understanding the model, understanding the task, and identifying model error. The result depends on assumptions about task-specific human intuitions.</aside></section>
+<section class="native-slide " data-title="Task: Pneumonia Diagnosis" data-source="hcai.pptx#59" data-builds='["Show the explanation: highlighted regions on the X-ray."]'><div class="act-header"><h2>Task: Pneumonia Diagnosis</h2></div><div class="native-columns"><div><div class="hks-copy"><p>Consider two users: one with task-specific intuitions, and one without.</p><p>The same explanation can mean different things to different people.</p></div></div><div><div class="highlight-xray"><img class="" src="resources/figure-hcai-59-0.png" alt="Chest X-ray used to illustrate task-specific interpretation"><span class="xray-mark mark-top fragment fade-in" data-fragment-index="0"></span><span class="xray-mark mark-bottom fragment fade-in" data-fragment-index="0"></span></div><p class="xray-caption fragment fade-in" data-fragment-index="0">The explanation: regions the AI relies on</p></div></div><aside class="notes">Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.</aside></section>
+<section class="native-slide " data-title="Without Task-Specific Intuitions" data-source="hcai.pptx#60"><div class="act-header"><h2>Without Task-Specific Intuitions</h2></div><div class="native-columns"><div><img class="persona-icon" src="resources/figure-hcai-60-0.png" alt="Alien icon: a user without task-specific intuitions"><div class="hks-copy"><p>The user cannot make sense of the highlighted information. Understanding the task remains bounded by understanding the model.</p></div></div><div><div class="highlight-xray"><img class="" src="resources/figure-hcai-59-0.png" alt="Chest X-ray used to illustrate task-specific interpretation"><span class="xray-mark mark-top"></span><span class="xray-mark mark-bottom"></span></div></div></div><aside class="notes">Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.</aside></section>
+<section class="native-slide " data-title="With Task-Specific Intuitions" data-source="hcai.pptx#61"><div class="act-header"><h2>With Task-Specific Intuitions</h2></div><div class="native-columns"><div><img class="persona-icon" src="resources/figure-hcai-61-0.png" alt="Doctor icon: a user with task-specific intuitions"><div class="hks-copy"><p>A user with relevant task knowledge may judge whether the model uses valid information.</p><p>This information may help the person judge when the model is right.</p></div></div><div><div class="highlight-xray"><img class="" src="resources/figure-hcai-59-0.png" alt="Chest X-ray used to illustrate task-specific interpretation"><span class="xray-mark mark-top"></span><span class="xray-mark mark-bottom"></span></div></div></div><aside class="notes">Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.</aside></section>
+<section class="native-slide " data-title="Human-Centered Explanations" data-source="hcai.pptx#67"><div class="act-header"><h2>Human-Centered Explanations</h2></div><ol class="hks-directions"><li>Articulate how people may interact with explanations.</li><li>Generate explanations that fit this mechanism.</li></ol><aside class="notes">The next study operationalizes this idea through case-based support and human-compatible similarity.</aside></section>
+<section class="native-slide " data-title="Pneumonia Diagnosis" data-source="hcai.pptx#68"><div class="act-header"><h2>Pneumonia Diagnosis</h2></div><figure class="figure "><img class="" src="resources/figure-hcai-68-0.png" alt="Test chest X-ray in the pneumonia classification task"></figure><aside class="notes">Laypeople participate in an experimental image-classification task; this is not a clinical deployment.</aside></section>
+<section class="native-slide " data-title="Pneumonia Diagnosis: Supporting the Prediction" data-source="hcai.pptx#71"><div class="act-header"><h2>Pneumonia Diagnosis: Supporting the Prediction</h2></div><div class="native-columns"><div><figure class="figure "><img class="" src="resources/figure-hcai-71-0.png" alt="Test chest X-ray"><figcaption>AI predicts pneumonia</figcaption></figure></div><div><figure class="figure "><img class="" src="resources/figure-hcai-71-1.png" alt="Labeled chest X-ray offered to support the prediction"><figcaption>Example supporting the prediction</figcaption></figure></div></div><p class="key-assumption"><strong>Key assumption:</strong> support helps when model similarity connects with the similarity people perceive.</p><aside class="notes">Compare the test image with a labeled supporting example. This mechanism relies on a relationship between similarity and model error, and on compatibility between model and human similarity.</aside></section>
+<section class="native-slide " data-title="AI Similarity Can Differ from Human Similarity" data-source="hcai.pptx#73"><div class="act-header"><h2>AI Similarity Can Differ from Human Similarity</h2></div><figure class="figure "><img class="" src="resources/figure-hcai-similarity.png" alt="Butterfly and moth example showing different nearest neighbors under human perception and AI representation"></figure><aside class="notes">This is the isolated similarity diagram from the source deck. Its embedded source is EMF; the figure alone was rasterized from the rendered source, excluding the slide title and footer.</aside></section>
+<section class="native-slide " data-title="Learning Representations That Match Human Similarity" data-source="hcai.pptx#76" data-builds='["Reveal the proposal, highlighted in peach."]'><div class="act-header"><h2>Learning Representations That Match Human Similarity</h2></div><div class="hks-copy"><p>Case-based explanations are derived from AI representations.</p><p>If the representation uses a different notion of similarity, the examples may be unhelpful.</p><p class="fragment fade-in ppt-reveal-callout centered-callout" data-fragment-index="0"><strong>Learn human-compatible representations.</strong></p></div></section>
+<section class="native-slide triplet-slide" data-title="Collect Human Triplet Judgments" data-source="hcai.pptx#77"><div class="act-header"><h2>Collect Human Triplet Judgments</h2></div><div class="triplet-query"><figure class="figure "><img class="" src="resources/figure-hcai-77-0.png" alt="Query chest X-ray"><figcaption>Query</figcaption></figure></div><div class="triplet-refs"><figure class="figure "><img class="" src="resources/figure-hcai-77-1.png" alt="Reference chest X-ray A"><figcaption>Reference A</figcaption></figure><figure class="figure "><img class="" src="resources/figure-hcai-77-2.png" alt="Reference chest X-ray B"><figcaption>Reference B</figcaption></figure></div><p class="large-caption">Which reference looks more similar to the query?</p><aside class="notes">The study collects human triplet judgments on chest X-rays. The supplied slides describe this as the first large-scale triplet dataset on chest X-rays and reference Agarwal et al. 2007 and Balntas et al. 2016 for triplet learning.</aside></section>
+<section class="native-slide objective-slide" data-title="Learning Human-Compatible Representations" data-source="hcai.pptx#78"><div class="act-header"><h2>Learning Human-Compatible Representations</h2></div><div class="hks-copy"><p>A multi-task objective combines:</p></div><div class="learning-objectives"><div><strong>Image classification</strong><span>Learn to distinguish the classes</span></div><span class="objective-plus">+</span><div><strong>Human judgment prediction</strong><span>Learn which examples people see as similar</span></div></div><figure class="figure "><img class="" src="resources/figure-hcai-78-0.png" alt="Joint cross-entropy and triplet-margin objective"></figure><aside class="notes">Combine classification cross-entropy and a triplet-margin loss, weighted by lambda. The latter aligns representation distances with human similarity judgments.</aside></section>
+<section class="native-slide support-slide" data-title="Experiment Setup: Neutral Decision Support" data-source="hcai.pptx#79"><div class="act-header"><h2>Experiment Setup: Neutral Decision Support</h2></div><div class="support-task"><figure class="figure query-xray"><img class="" src="resources/figure-hcai-79-0.png" alt="Test chest X-ray"><figcaption>Test image</figcaption></figure><div class="support-choices"><figure class="figure "><img class="" src="resources/figure-hcai-79-1.png" alt="Example from the predicted class"><figcaption>Nearest neighbor in the predicted class</figcaption></figure><figure class="figure "><img class="" src="resources/figure-hcai-79-2.png" alt="Example from the other class"><figcaption>Nearest neighbor in the other class</figcaption></figure></div></div><p class="small-note">Choose a diagnosis by comparing the test image with one example from each class.</p><aside class="notes">Neutral support retrieves the nearest neighbor from each class. Participants are laypeople.</aside></section>
+<section class="native-slide " data-title="Experiment Setup: Comparing Three Representations" data-source="hcai.pptx#80"><div class="act-header"><h2>Experiment Setup: Comparing Three Representations</h2></div><table class="data-table "><thead><tr><th>Condition</th><th>How examples are chosen</th></tr></thead><tbody><tr><td>Random</td><td>Random supporting examples</td></tr><tr><td>Standard AI</td><td>Nearest examples in the standard learned representation</td></tr><tr><td>Human-compatible AI</td><td>Nearest examples in a representation trained with human judgments</td></tr></tbody></table><aside class="notes">The source deck calls these Random, AI, and HC. This wording makes the experimental contrast explicit.</aside></section>
+<section class="native-slide results-slide" data-title="Human-Compatible Examples Improve Decision Support" data-source="hcai.pptx#81" data-builds='["Hide the butterfly versus moth chart and focus on pneumonia: show 79.1% accuracy, 13.2 points above random, and 15.3 points above standard AI together."]'><div class="act-header"><h2>Human-Compatible Examples Improve Decision Support</h2></div><div class="native-columns"><div><figure class="figure "><img class="" src="resources/figure-hcai-81-0.png" alt="Human accuracy in pneumonia classification for random, standard AI, and human-compatible examples"><div class="native-chart-labels"><span>Random</span><span>Standard<br>AI</span><span>Human-<br>compatible</span></div><figcaption>Pneumonia classification</figcaption></figure></div><div class="right-stack"><div class="accuracy-stats fragment fade-in" data-fragment-index="0"><p><strong>79.1%</strong> human accuracy</p><p><strong>13.2 points</strong> above random supporting examples</p><p><strong>15.3 points</strong> above standard AI examples</p></div><figure class="figure fragment fade-out" data-fragment-index="0"><img class="" src="resources/figure-hcai-81-1.png" alt="Human accuracy in butterfly versus moth classification for random, standard AI, and human-compatible examples"><div class="native-chart-labels"><span>Random</span><span>Standard<br>AI</span><span>Human-<br>compatible</span></div><figcaption>Butterfly vs. moth</figcaption></figure></div></div><p class="chart-key">Human decision accuracy · error bars show 95% confidence intervals</p><aside class="notes">Original extracted chart figures. Error bars show 95% confidence intervals. Lay participants complete experimental tasks. Neutral support is shown here. The paper reports 79.1% for human-compatible neutral support, 63.8% for standard support, and 65.9% for random support: 13.2 percentage points above random and 15.3 points above standard AI.</aside></section>
+<section class="native-slide support-slide" data-title="Experiment Setup: Persuasive Decision Support" data-source="hcai.pptx#82"><div class="act-header"><h2>Experiment Setup: Persuasive Decision Support</h2></div><div class="support-task"><figure class="figure query-xray"><img class="" src="resources/figure-hcai-79-0.png" alt="Test chest X-ray"><figcaption>Test image</figcaption></figure><div class="support-choices"><figure class="figure "><img class="" src="resources/figure-hcai-79-1.png" alt="Example from the predicted class"><figcaption>Nearest neighbor in the predicted class</figcaption></figure><figure class="figure "><img class="" src="resources/figure-hcai-79-2.png" alt="Example from the other class"><figcaption><strong>Farthest</strong> neighbor in the other class</figcaption></figure></div></div><p class="small-note">Make the contrast more favorable to the prediction by choosing a distant example from the other class.</p><aside class="notes">Persuasive support retrieves the nearest neighbor from the predicted class and the farthest neighbor from the other class. This changes the interaction mechanism relative to neutral support.</aside></section>
+<section class="native-slide results-slide" data-title="Human-Compatible Examples Are Also More Persuasive" data-source="hcai.pptx#83"><div class="act-header"><h2>Human-Compatible Examples Are Also More Persuasive</h2></div><div class="native-columns"><div><figure class="figure"><div class="joined-chart"><img class="" src="resources/figure-hcai-83-1.png" alt="Random examples, persuasive support"><img class="" src="resources/figure-hcai-83-0.png" alt="Standard AI and human-compatible examples, persuasive support"></div><div class="native-chart-labels"><span>Random</span><span>Standard<br>AI</span><span>Human-<br>compatible</span></div><figcaption>Pneumonia classification</figcaption></figure></div><div><figure class="figure"><div class="joined-chart"><img class="" src="resources/figure-hcai-83-3.png" alt="Random examples, persuasive support"><img class="" src="resources/figure-hcai-83-2.png" alt="Standard AI and human-compatible examples, persuasive support"></div><div class="native-chart-labels"><span>Random</span><span>Standard<br>AI</span><span>Human-<br>compatible</span></div><figcaption>Butterfly vs. moth</figcaption></figure></div></div><p class="chart-key">Human decision accuracy · error bars show 95% confidence intervals</p><aside class="notes">These are the original extracted persuasive-support plots, composed from their embedded chart fragments. Lay participants, experimental task. Persuasive support is a separate condition from neutral support.</aside></section>
+<section data-title="Future Directions"><div class="act-header"><h2>Future Directions</h2></div><ol class="hks-directions"><li><strong>Interactive intervention</strong><span>AI that helps people reason through policy choices</span></li><li><strong>Continuously updated evidence</strong><span>Research findings that stay useful for decision making</span></li><li><strong>AI scientist for AI safety</strong><span>Evaluation that responds to emerging incidents and adapts to model behavior</span></li></ol><aside class="notes">CivicChats and LivingScience provide examples of the first two directions. The third uses AI scientists to turn emerging AI safety incidents into evaluations.</aside></section>
+<section data-title="Interactive Intervention: CivicChats"><div class="act-header"><h2>Interactive Intervention: CivicChats</h2></div><div class="hks-columns"><div><img src="resources/civicchats_home.png" alt="CivicChats website"></div><div class="hks-copy"><p>People can ask questions about a ballot measure and examine competing considerations.</p><p>Evaluate how interaction changes reasoning and participation.</p><p>Early results show that a reflective chatbot can substantially change voting behavior.</p><p><a href="https://civicchats.org">civicchats.org</a></p></div></div><aside class="notes">CivicChats studies Q&amp;A, argumentative, and reflective chat conditions around ballot measures. Experiments examine changes in articulated tradeoffs and vote distributions. These effects make the goals and design of an intervention consequential. Do not define success as moving votes in a preferred direction.</aside></section>
+<section data-title="Continuously Updated Evidence: LivingScience"><div class="act-header"><h2>Continuously Updated Evidence: LivingScience</h2></div><div class="hks-columns"><div><img src="resources/living_minimum_wages_fig2.png" alt="LivingScience extension of minimum-wage evidence, comparing the original and more recent periods"></div><div class="hks-copy"><p>Reproduce influential findings (e.g., Cengiz et al., QJE 2019) and extend them as new data arrive.</p><p>Keep code and discussion open so people can examine the evidence behind policy choices.</p><p><a href="https://livingscience.ai">livingscience.ai</a></p></div></div><aside class="notes">The minimum-wage example extends Cengiz et al. (2019) to newer data. The figure contrasts 1979–2016 and 2016–2024, with confidence intervals. The goal is to keep the evidence useful for decisions as the world changes.</aside></section>
+<section data-title="AI Scientist for AI Safety"><div class="act-header"><h2>AI Scientist for AI Safety</h2></div><div class="hks-copy"><p>AI behavior is increasingly unexpected.</p><img class="incident-image" src="resources/cohere_qwen.png" alt="Cohere: Concerning behavior from a popular open-weight AI model. Inside a closed testing sandbox, one of Alibaba's newest Qwen3.8 models attempted to push a diagnostic file toward a remote storage container in Beijing, after its reasoning stated that zero tools would be triggered."><p>We turn the incident into environments to quickly evaluate other models.</p><p>We are also building AI scientists to automatically identify potential failures.</p></div><aside class="notes">Cohere reported the behavior on October 26, 2026 and released raw traces on Hugging Face with a reproduction script. The model's reasoning said it would not use external tools; the next step tried to send a test string to an external server before the sandbox blocked it. Cohere could not determine intent, and critics argued the trigger search steered the model. Check Point replayed the moment 64 times and saw 52 different addresses. The point is speed: an AI scientist converts the released traces into an evaluation environment so other models can be tested in the same setting within days. Source: TechCrunch, October 26, 2026.</aside></section>
+<section data-title="Thank You" class="closing-overview"><div class="research-map"><div class="rm-apps"><div class="rm-box"><div class="rm-box-title">Decision Making</div><div class="rm-topic"><span class="rm-topic-name">Healthcare</span> <span class="rm-cite">(e.g., <span>Nature Communications 2025</span>, <span>FAccT 2025</span>, <span>ML4H 2023</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Persuasion</span> <span class="rm-cite">(e.g., <span>ACL 2023</span>, <span>TACL 2019</span>, <span>WWW 2016</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Political communication</span> <span class="rm-cite">(e.g., <span>PNAS Nexus 2024</span>, <span>Findings of EMNLP 2023</span>, <span>ICWSM 2016</span>)</span></div></div><div class="rm-box"><div class="rm-box-title">Scientific Discovery</div><div class="rm-topic"><span class="rm-topic-name">AI scientists</span> <span class="rm-cite">(e.g., <span><a href="https://github.com/ChicagoHAI/neurico" target="_blank" rel="noopener">NeuriCo</a></span>, <span><a href="https://arxiv.org/abs/2607.02931v1" target="_blank" rel="noopener">VERITAS</a></span>, <span>ACL 2025</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Interdisciplinary collaboration (sciences, social sciences)</span> <span class="rm-cite">(e.g., <span><a href="https://livingscience.ai" target="_blank" rel="noopener">LivingScience</a></span>, <span><a href="https://www.youtube.com/watch?v=qiRSwn0fn04" target="_blank" rel="noopener">NeuriCo-battery</a></span>, <span><a href="https://virtualcellchallenge.org" target="_blank" rel="noopener">Virtual Cell Challenge</a></span>, <span>ICML Workshop 2026</span>)</span></div></div></div><div class="rm-agents"><img src="resources/human.png" alt="Human"><svg class="rm-arrow" viewbox="0 0 300 40" aria-hidden="true"><defs><marker id="rm-head-end" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"></path></marker></defs><line x1="15" y1="20" x2="285" y2="20" marker-start="url(#rm-head-end)" marker-end="url(#rm-head-end)"></line></svg><img src="resources/ai.png" alt="AI"></div><div class="rm-box rm-foundation"><div class="rm-box-title">Understanding and Improving AI</div><div><div class="rm-topic"><span class="rm-topic-name">Causal reasoning</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026a</span>, <span>ICLR 2026</span>, <span>TMLR 2024</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">Interpretability/explanations</span> <span class="rm-cite">(e.g., <span>NeurIPS 2026b</span>, <span>TMLR 2023</span>, <span>FAccT 2020</span>)</span></div><div class="rm-topic"><span class="rm-topic-name">AI alignment/safety</span> <span class="rm-cite">(e.g., <span>ICML 2026</span>, <span>EMNLP 2026</span>, <span>NeurIPS 2025</span>)</span></div></div></div></div><div class="closing-contact"><a href="https://chenhaot.com">chenhaot.com</a> · chenhao@uchicago.edu · @ChenhaoTan</div></section>
+<section class="native-slide question-slide" data-title="Backup Slides"><p class="display-question">Backup Slides</p></section>
+<section class="native-slide " data-title="Patient Sex, Race, and Age Are Not Related to Workload" data-source="physician_fatigue.pptx#29"><div class="act-header"><h2>Patient Sex, Race, and Age Are Not Related to Workload</h2></div><img class="table-figure" style="width:673px" src="resources/table-sanity.png" alt="Regressions of patient sex, race, and age on prior workload: workload coefficients −0.0055 (0.006), −0.0023 (0.006), −0.1562 (0.189), none significant"><aside class="notes">Earlier analysis. The workload coefficients are not statistically significant with the included physician, chief-complaint, and time controls.</aside></section>
+<section class="native-slide " data-title="Chief Complaints Are Not Related to Workload Beyond Chance" data-source="physician_fatigue.pptx#30"><div class="act-header"><h2>Chief Complaints Are Not Related to Workload Beyond Chance</h2></div><figure class="figure "><img class="" src="resources/sanity_check_2.png" alt="Ordered p-values for the relationship between chief complaint and workload"></figure><aside class="notes">Earlier analysis. The horizontal line marks the conventional 0.05 threshold; the distribution of p-values provides a balance check.</aside></section></div></div><script src="resources/reveal.min.js"></script><script src="resources/notes.min.js"></script><script>
+const printMode=new URLSearchParams(location.search).has('print-pdf');
+const printLayout=document.createElement('style');printLayout.media=printMode?'all':'print';
+printLayout.textContent=document.querySelector('style').textContent.replace(/([\d.]+)(vw|vh)\b/g,(_,v,u)=>`${Number(v)*(u==='vw'?17.2:10.75)}px`);document.head.insertBefore(printLayout,document.querySelector('link[href="resources/typography.css"]'));
+if(printMode)document.documentElement.classList.add('print-pdf');
+document.addEventListener('keydown',e=>{if(!printMode&&(e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='p'){e.preventDefault();location.href=location.pathname+'?print-pdf&autoprint';}});
+if(printMode&&new URLSearchParams(location.search).has('autoprint'))Reveal.on('pdf-ready',()=>setTimeout(()=>window.print(),300));
+document.fonts.ready.then(()=>Reveal.initialize({width:1720,height:1075,margin:0,minScale:.2,maxScale:2,controls:true,progress:true,slideNumber:'c/t',hash:true,center:false,pdfSeparateFragments:false,pdfMaxPagesPerSlide:1,pdfPageHeightOffset:0,transition:'fade',transitionSpeed:'slow',backgroundTransition:'none',plugins:[RevealNotes]}));
+</script></body></html>
