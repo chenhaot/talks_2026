@@ -24,7 +24,19 @@ chenhao@uchicago.edu, @ChenhaoTan
 
 Speaker notes: Policy outcomes hinge on the decisions people make.
 
-## Slide 2 — An Overview of My Research
+## Slide 2 — Alignment Requires Evidence
+
+![Human](resources/human.png)
+
+![AI](resources/ai.png)
+
+Alignment is not a problem to solve, but a **relationship** to understand and manage.
+
+It requires **evidence-based policymaking**.
+
+Speaker notes: Alignment between people and AI is ongoing. As models and the ways people use them change, we need evidence about how people and AI interact, and policy that responds to that evidence.
+
+## Slide 3 — An Overview of My Research
 
 Decision Making
 
@@ -52,7 +64,7 @@ Interpretability/explanations (e.g., NeurIPS 2026b, TMLR 2023, FAccT 2020)
 
 AI alignment/safety (e.g., ICML 2026, EMNLP 2026, NeurIPS 2025)
 
-## Slide 3 — Today: Healthcare and Explanations
+## Slide 4 — Today: Healthcare and Explanations
 
 Decision Making
 
@@ -80,14 +92,14 @@ Interpretability/explanations (e.g., NeurIPS 2026b, TMLR 2023, FAccT 2020)
 
 AI alignment/safety (e.g., ICML 2026, EMNLP 2026, NeurIPS 2025)
 
-## Slide 4 — Policy outcomes hinge on human decisions
+## Slide 5 — Policy outcomes hinge on human decisions
 
 Policy outcomes hinge on
 **human decisions**
 
 Speaker notes: A policy takes effect through many individual choices. A physician decides whom to test. A voter decides how to interpret a ballot measure. AI can help us study these decisions and change the information people use.
 
-## Slide 5 — Understanding human decisions · Shaping human decisions
+## Slide 6 — Understanding human decisions · Shaping human decisions
 
 ![Human](resources/human.png)
 
@@ -109,7 +121,7 @@ Animation builds:
 
 Speaker notes: AI uses the record of human decisions to understand the conditions under which people decide. AI assistance can then shape the information people use. Highlight understanding before beginning the physician study. The published paper is titled A machine learning model using clinical notes to identify physician fatigue.
 
-## Slide 6 — Decision of Interest in Emergency Care
+## Slide 7 — Decision of Interest in Emergency Care
 
 A patient arrives with chest pain.
 
@@ -131,7 +143,7 @@ failure cases
 
 Speaker notes: Motivate the choice before discussing the fatigue measure. Testing yield is the fraction of assigned tests that are positive. It captures one dimension of decision quality, not every clinical outcome.
 
-## Slide 7 — Does physician fatigue relate to decision quality?
+## Slide 8 — Does physician fatigue relate to decision quality?
 
 Does physician fatigue relate to
 decision quality?
@@ -142,7 +154,7 @@ Animation builds:
 
 1. Reveal the key contribution.
 
-## Slide 8 — The Paradox of Physician Fatigue
+## Slide 9 — The Paradox of Physician Fatigue
 
 - **Physician burnout is prevalent.**
 
@@ -150,13 +162,32 @@ Animation builds:
 
 - **Earlier research found limited evidence connecting fatigue with real patient outcomes.** (Arnedt et al. 2005; Ayas et al. 2006; Barger et al. 2006; Johns et al. 2009; Landrigan et al. 2004; Lockley et al. 2004)
 
-- One possible reason: studies used coarse measures related to workload.
-
 PowerPoint source: `physician_fatigue.pptx#13`
 
 Speaker notes: This is the motivation in the supplied study slides. Burnout and fatigue are related but distinct concepts. The 65% figure is a historical 2022 report, not a current prevalence estimate.
 
-## Slide 9 — Can we learn about physician fatigue from clinical notes?
+## Slide 10 — Workload Does Not Predict Decision Quality
+
+![Regression of testing yield on prior workload: workload coefficient −0.0081 (0.009), not significant; n = 1,017](resources/table-workload-yield.png)
+
+![](resources/table-workload-yield-1.png)
+
+Regress testing yield on prior workload (days worked in the past week).
+
+The coefficient is small and **not statistically significant**.
+
+Decision quality is not correlated with workload in our dataset.
+
+One possible reason: studies used coarse measures related to workload.
+
+Animation builds:
+
+1. Outline the workload coefficient and reveal that it is not significant.
+2. Reveal one possible reason: coarse workload measures.
+
+Speaker notes: Published Table 2, first column. This reproduces the pattern in earlier literature: a coarse workload measure shows no detectable relationship with decision quality. The same regression returns later with predicted fatigue.
+
+## Slide 11 — Can we learn about physician fatigue from clinical notes?
 
 ![Human](resources/human.png)
 
@@ -166,7 +197,7 @@ Clinical notes
 
 Speaker notes: The note records the patient encounter and may also reveal something about the person making the decision.
 
-## Slide 10 — Example clinical notes
+## Slide 12 — Example clinical notes
 
 Chenhao is a 34-year-old male who presents with a chief complaint of chest pain for the past 3 days. The pain is described as a dull, pressure-like sensation located in the mid-sternal area, radiating to the left shoulder and arm. It is rated as 6/10 in intensity and worsens with physical activity, such as climbing stairs, but improves with rest. He denies any recent trauma to the chest.
 
@@ -174,7 +205,7 @@ PowerPoint source: `physician_fatigue.pptx#5`
 
 Speaker notes: Fictional clinical note used to illustrate the record of a physician–patient encounter.
 
-## Slide 11 — Intuitively, workload should not affect clinical notes in the ideal world
+## Slide 13 — Intuitively, workload should not affect clinical notes in the ideal world
 
 Fatigue
 
@@ -184,7 +215,7 @@ PowerPoint source: `physician_fatigue.pptx#17`
 
 Speaker notes: The measurement assumption concerns patient characteristics: prior workload should not systematically change which patients a physician sees. Workload can affect how a physician writes through fatigue.
 
-## Slide 12 — However, physicians do get tired
+## Slide 14 — However, physicians do get tired
 
 Fatigue
 
@@ -200,7 +231,7 @@ Animation builds:
 
 1. Reveal the missing-ground-truth challenge after the fatigue-to-notes diagram.
 
-## Slide 13 — From Workload to a Note-Based Fatigue Measure
+## Slide 15 — From Workload to a Note-Based Fatigue Measure
 
 Workload
 
@@ -225,7 +256,7 @@ Animation builds:
 
 Speaker notes: This exclusion assumption is needed to interpret the score as fatigue. The score remains a proxy and may capture other properties of documentation.
 
-## Slide 14 — Data and Prediction Task
+## Slide 16 — Data and Prediction Task
 
 **129,228** emergency department encounters
 
@@ -239,7 +270,7 @@ Prior workload in the supplied study slides
 
 Speaker notes: The published study describes 2010–2012 at a single academic center. The supplied earlier slides describe a longer period. High workload means at least four prior workdays; low workload means the first workday in seven days. The workload distribution is from the supplied study slides.
 
-## Slide 15 — Data and Prediction Task
+## Slide 17 — Data and Prediction Task
 
 - **X:** a clinical note
 
@@ -257,7 +288,7 @@ Animation builds:
 
 Speaker notes: Patient-level train/test splitting keeps repeat visits by the same patient together. Workload is a training label; it is not a direct fatigue measurement. The balance checks on patient demographics and chief complaints are in the backup slides.
 
-## Slide 16 — Features
+## Slide 18 — Features
 
 - **Note length**
 
@@ -279,7 +310,7 @@ PowerPoint source: `physician_fatigue.pptx#31-32`
 
 Speaker notes: GPT-2 is fine-tuned on training notes. Higher log perplexity means less predictable text. The supplied slides use inconsistent sign conventions in their descriptions; this deck uses log perplexity throughout.
 
-## Slide 17 — Notes Predict Prior Workload
+## Slide 19 — Notes Predict Prior Workload
 
 ![AUC-ROC for predicting prior workload: chief complaint baseline 50.0%, zero-shot Vicuna-7B 53.2%, clinical note features 60.1%](resources/table-auc.png)
 
@@ -291,7 +322,7 @@ Animation builds:
 
 Speaker notes: Chance AUC is 50%. These are workload-prediction results, not diagnostic accuracy for clinical fatigue.
 
-## Slide 18 — Other Measures of Fatigue
+## Slide 20 — Other Measures of Fatigue
 
 **Hypothesis:** if notes capture fatigue, predicted fatigue should also track other measures of fatigue.
 
@@ -305,7 +336,7 @@ PowerPoint source: `physician_fatigue.pptx#36`
 
 Speaker notes: These measures are used for validation beyond the workload training label.
 
-## Slide 19 — Predicted Fatigue Correlates with Other Fatigue Measures
+## Slide 21 — Predicted Fatigue Correlates with Other Fatigue Measures
 
 ![Published Table 1, columns 1 to 4: predicted fatigue is associated with workload 0.384 (0.087), overnight shift 0.041 (0.018), variation in shift start time 5.606 (2.265), and patients seen prior 1.073 (0.298)](resources/table-fatigue-hospital.png)
 
@@ -319,13 +350,13 @@ Animation builds:
 
 Speaker notes: Published Table 1, internal hold-out set (n = 34,175). These are associations and proxy predictions.
 
-## Slide 20 — Predicted Fatigue Rises Overnight
+## Slide 22 — Predicted Fatigue Rises Overnight
 
 ![Predicted fatigue rises across overnight hours, compared with other shifts. Error bars show uncertainty.](resources/fatigue-published-overnight.png)
 
 Speaker notes: The model never trained on overnight-shift labels. The published figure shows predictions rising across the overnight shift. Other checks include patients seen earlier in a shift, variation in shift start times, and external validation in MIMIC-III.
 
-## Slide 21 — External Validation on MIMIC-III
+## Slide 23 — External Validation on MIMIC-III
 
 ![Published Table 1 with external validation: in MIMIC-III, predicted fatigue is associated with the overnight shift, 0.364 (0.162)](resources/table-fatigue-mimic.png)
 
@@ -339,7 +370,7 @@ Animation builds:
 
 Speaker notes: The final column is external validation. The overnight association extends to MIMIC-III (n = 1,216). The score is not a clinical fatigue diagnosis.
 
-## Slide 22 — Fatigue and Testing Decisions
+## Slide 24 — Fatigue and Testing Decisions
 
 Decision: whether to test for acute coronary syndromes
 
@@ -349,7 +380,7 @@ Compare this measure of decision quality with note-based fatigue and with prior 
 
 Speaker notes: A lower positive rate can mean testing more low-risk patients. Yield is one measure of decision quality and cannot capture every benefit or harm of testing. The regression adjusts for patient, physician, and time factors.
 
-## Slide 23 — Predicted Fatigue and Testing Yield
+## Slide 25 — Predicted Fatigue and Testing Yield
 
 ![Published Table 2: effect of workload on yield of testing −0.0081 (0.009); effect of predicted fatigue −0.2935 (0.147), p < 0.05; n = 1,017](resources/table-yield.png)
 
@@ -368,7 +399,7 @@ Animation builds:
 
 Speaker notes: Testing yield is 19.0% lower per standard deviation of predicted fatigue. Prior workload itself has a small, statistically insignificant association. The result does not establish that intervening on the score would cause better outcomes.
 
-## Slide 24 — Fatigue Scores and Patient Race
+## Slide 26 — Fatigue Scores and Patient Race
 
 ![Regression of prior workload and predicted fatigue on patient race, sex, and age. Predicted fatigue versus White patients: Black 0.0112 (0.001), Hispanic 0.0192 (0.001), Other 0.0086 (0.002), all p < 0.001. Prior workload: Black −0.0009 (0.017), Hispanic −0.0125 (0.018), Other −0.0213 (0.027), none significant.](resources/table-race.png)
 
@@ -387,7 +418,7 @@ Animation builds:
 
 Speaker notes: This exploratory analysis appears in the 2023 preprint, rather than the published Nature Communications paper. It cannot distinguish clinician fatigue, bias in documentation, patient differences, or measurement bias, and it does not imply that patient race causes fatigue. The table shows the race coefficients from the supplied study slides. Standard errors for predicted fatigue: Black 0.001, Hispanic 0.001, Other 0.002. Standard errors for prior workload: 0.017, 0.018, 0.027. Models include sex, age, physician, chief complaints, and time controls.
 
-## Slide 25 — What Changes in the Notes?
+## Slide 27 — What Changes in the Notes?
 
 ![Published Table 3: correlations with physician workload; perplexity (log) −0.092; insight −0.09; certainty 0.075; first person singular pronouns −0.07; impersonal pronouns −0.049; anger 0.025; Flesch-Kincaid grade −0.05; all p < 0.001](resources/table-features.png)
 
@@ -411,7 +442,7 @@ Animation builds:
 
 Speaker notes: Earlier feature correlations with workload: notes become more predictable, contain more certainty and fewer insight words, and contain more anger words. These associations do not establish an individual physician’s fatigue or emotional state. More certain language does not imply more accurate judgment.
 
-## Slide 26 — What Happens When AI Writes the Notes?
+## Slide 28 — What Happens When AI Writes the Notes?
 
 LLM-generated text is predictable and may receive a high “fatigue” score.
 
@@ -427,7 +458,7 @@ Animation builds:
 
 Speaker notes: Earlier exploratory analysis. The original slide describes differences of 75 or 250 percentage points. These are differences in model scores for generated versus original text; generated text does not experience fatigue. Applying a model trained on human-written notes to generated text changes the data-generating process.
 
-## Slide 27 — Integrating AI into Note Generation
+## Slide 29 — Integrating AI into Note Generation
 
 Separate the different goals of note writing.
 
@@ -439,7 +470,7 @@ PowerPoint source: `physician_fatigue.pptx#55`
 
 Speaker notes: These are proposed design directions, not evaluated interventions in the fatigue study.
 
-## Slide 28 — Understanding human decisions · Shaping human decisions
+## Slide 30 — Understanding human decisions · Shaping human decisions
 
 ![Human](resources/human.png)
 
@@ -457,7 +488,7 @@ Han Liu et al. · ICLR 2023
 
 Speaker notes: Return to the opening diagram and highlight shaping. The next question is how AI can help people make better decisions.
 
-## Slide 29 — Explanations Need to Activate Task-Specific Intuitions
+## Slide 31 — Explanations Need to Activate Task-Specific Intuitions
 
 ![Pathway from an explanation to human understanding of the model](resources/figure-hcai-58-2.png)
 
@@ -471,7 +502,7 @@ PowerPoint source: `hcai.pptx#58`
 
 Speaker notes: These are extracted diagram figures, not slide screenshots. The framework distinguishes understanding the model, understanding the task, and identifying model error. The result depends on assumptions about task-specific human intuitions.
 
-## Slide 30 — Task: Pneumonia Diagnosis
+## Slide 32 — Task: Pneumonia Diagnosis
 
 Consider two users: one with task-specific intuitions, and one without.
 
@@ -489,7 +520,7 @@ Animation builds:
 
 Speaker notes: Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.
 
-## Slide 31 — Without Task-Specific Intuitions
+## Slide 33 — Without Task-Specific Intuitions
 
 ![Alien icon: a user without task-specific intuitions](resources/figure-hcai-60-0.png)
 
@@ -501,7 +532,7 @@ PowerPoint source: `hcai.pptx#60`
 
 Speaker notes: Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.
 
-## Slide 32 — With Task-Specific Intuitions
+## Slide 34 — With Task-Specific Intuitions
 
 ![Doctor icon: a user with task-specific intuitions](resources/figure-hcai-61-0.png)
 
@@ -515,7 +546,7 @@ PowerPoint source: `hcai.pptx#61`
 
 Speaker notes: Illustrative chest X-ray from the supplied explanation deck, which originally labels this example COVID diagnosis. The edited outline changes the final case to pneumonia; the rebuilt sequence consistently uses pneumonia as the decision task. The highlighted regions illustrate how people interpret model attention; they are not clinical guidance.
 
-## Slide 33 — Human-Centered Explanations
+## Slide 35 — Human-Centered Explanations
 
 - Articulate how people may interact with explanations.
 
@@ -525,7 +556,7 @@ PowerPoint source: `hcai.pptx#67`
 
 Speaker notes: The next study operationalizes this idea through case-based support and human-compatible similarity.
 
-## Slide 34 — Pneumonia Diagnosis
+## Slide 36 — Pneumonia Diagnosis
 
 ![Test chest X-ray in the pneumonia classification task](resources/figure-hcai-68-0.png)
 
@@ -533,7 +564,7 @@ PowerPoint source: `hcai.pptx#68`
 
 Speaker notes: Laypeople participate in an experimental image-classification task; this is not a clinical deployment.
 
-## Slide 35 — Pneumonia Diagnosis: Supporting the Prediction
+## Slide 37 — Pneumonia Diagnosis: Supporting the Prediction
 
 ![Test chest X-ray](resources/figure-hcai-71-0.png)
 
@@ -549,7 +580,7 @@ PowerPoint source: `hcai.pptx#71`
 
 Speaker notes: Compare the test image with a labeled supporting example. This mechanism relies on a relationship between similarity and model error, and on compatibility between model and human similarity.
 
-## Slide 36 — AI Similarity Can Differ from Human Similarity
+## Slide 38 — AI Similarity Can Differ from Human Similarity
 
 ![Butterfly and moth example showing different nearest neighbors under human perception and AI representation](resources/figure-hcai-similarity.png)
 
@@ -557,7 +588,7 @@ PowerPoint source: `hcai.pptx#73`
 
 Speaker notes: This is the isolated similarity diagram from the source deck. Its embedded source is EMF; the figure alone was rasterized from the rendered source, excluding the slide title and footer.
 
-## Slide 37 — Learning Representations That Match Human Similarity
+## Slide 39 — Learning Representations That Match Human Similarity
 
 Case-based explanations are derived from AI representations.
 
@@ -571,7 +602,7 @@ Animation builds:
 
 1. Reveal the proposal, highlighted in peach.
 
-## Slide 38 — Collect Human Triplet Judgments
+## Slide 40 — Collect Human Triplet Judgments
 
 ![Query chest X-ray](resources/figure-hcai-77-0.png)
 
@@ -591,7 +622,7 @@ PowerPoint source: `hcai.pptx#77`
 
 Speaker notes: The study collects human triplet judgments on chest X-rays. The supplied slides describe this as the first large-scale triplet dataset on chest X-rays and reference Agarwal et al. 2007 and Balntas et al. 2016 for triplet learning.
 
-## Slide 39 — Learning Human-Compatible Representations
+## Slide 41 — Learning Human-Compatible Representations
 
 A multi-task objective combines:
 
@@ -607,7 +638,7 @@ PowerPoint source: `hcai.pptx#78`
 
 Speaker notes: Combine classification cross-entropy and a triplet-margin loss, weighted by lambda. The latter aligns representation distances with human similarity judgments.
 
-## Slide 40 — Experiment Setup: Neutral Decision Support
+## Slide 42 — Experiment Setup: Neutral Decision Support
 
 ![Test chest X-ray](resources/figure-hcai-79-0.png)
 
@@ -627,7 +658,7 @@ PowerPoint source: `hcai.pptx#79`
 
 Speaker notes: Neutral support retrieves the nearest neighbor from each class. Participants are laypeople.
 
-## Slide 41 — Experiment Setup: Comparing Three Representations
+## Slide 43 — Experiment Setup: Comparing Three Representations
 
 | Condition | How examples are chosen |
 | --- | --- |
@@ -639,7 +670,7 @@ PowerPoint source: `hcai.pptx#80`
 
 Speaker notes: The source deck calls these Random, AI, and HC. This wording makes the experimental contrast explicit.
 
-## Slide 42 — Human-Compatible Examples Improve Decision Support
+## Slide 44 — Human-Compatible Examples Improve Decision Support
 
 ![Human accuracy in pneumonia classification for random, standard AI, and human-compatible examples](resources/figure-hcai-81-0.png)
 
@@ -681,7 +712,7 @@ Animation builds:
 
 Speaker notes: Original extracted chart figures. Error bars show 95% confidence intervals. Lay participants complete experimental tasks. Neutral support is shown here. The paper reports 79.1% for human-compatible neutral support, 63.8% for standard support, and 65.9% for random support: 13.2 percentage points above random and 15.3 points above standard AI.
 
-## Slide 43 — Experiment Setup: Persuasive Decision Support
+## Slide 45 — Experiment Setup: Persuasive Decision Support
 
 ![Test chest X-ray](resources/figure-hcai-79-0.png)
 
@@ -701,7 +732,7 @@ PowerPoint source: `hcai.pptx#82`
 
 Speaker notes: Persuasive support retrieves the nearest neighbor from the predicted class and the farthest neighbor from the other class. This changes the interaction mechanism relative to neutral support.
 
-## Slide 44 — Human-Compatible Examples Are Also More Persuasive
+## Slide 46 — Human-Compatible Examples Are Also More Persuasive
 
 ![Random examples, persuasive support](resources/figure-hcai-83-1.png)
 
@@ -737,17 +768,19 @@ PowerPoint source: `hcai.pptx#83`
 
 Speaker notes: These are the original extracted persuasive-support plots, composed from their embedded chart fragments. Lay participants, experimental task. Persuasive support is a separate condition from neutral support.
 
-## Slide 45 — Future Directions
+## Slide 47 — Future Directions
 
-- **Interactive intervention**AI that helps people reason through policy choices
+- **Interactive interventionNew form of intervention**AI that helps people reason through policy choices
 
-- **Continuously updated evidence**Research findings that stay useful for decision making
+- **Continuously updated evidenceNew form of evidence**Research findings that stay useful for decision making
 
-- **AI scientist for AI safety**Evaluation that responds to emerging incidents and adapts to model behavior
+- **AI scientist for AI safetyNew form of governance**Evaluation that responds to emerging incidents and adapts to model behavior
 
 Speaker notes: CivicChats and LivingScience provide examples of the first two directions. The third uses AI scientists to turn emerging AI safety incidents into evaluations.
 
-## Slide 46 — Interactive Intervention: CivicChats
+## Slide 48 — Interactive Intervention: CivicChats
+
+Tag: New form of intervention
 
 ![CivicChats website](resources/civicchats_home.png)
 
@@ -761,19 +794,23 @@ Early results show that a reflective chatbot can substantially change voting beh
 
 Speaker notes: CivicChats studies Q&A, argumentative, and reflective chat conditions around ballot measures. Experiments examine changes in articulated tradeoffs and vote distributions. These effects make the goals and design of an intervention consequential. Do not define success as moving votes in a preferred direction.
 
-## Slide 47 — Continuously Updated Evidence: LivingScience
+## Slide 49 — Continuously Updated Evidence: LivingScience
 
-![LivingScience extension of minimum-wage evidence, comparing the original and more recent periods](resources/living_minimum_wages_fig2.png)
+Tag: New form of evidence
 
-Reproduce influential findings (e.g., Cengiz et al., QJE 2019) and extend them as new data arrive.
+![LivingScience extension of the China Syndrome: the manufacturing employment effect of the fixed 2000 to 2007 import shock deepens from about −0.26 in 2007 to −0.61 in 2018 and is −0.54 in 2023](resources/living_china_syndrome_fig2.png)
 
-Keep code and discussion open so people can examine the evidence behind policy choices.
+Reproduce influential findings (e.g., Autor, Dorn & Hanson, “The China Syndrome,” 2013) and extend them as new data arrive.
 
-[livingscience.ai](https://livingscience.ai)
+The manufacturing job loss from the China shock kept deepening for a decade after the original study.
 
-Speaker notes: The minimum-wage example extends Cengiz et al. (2019) to newer data. The figure contrasts 1979–2016 and 2016–2024, with confidence intervals. The goal is to keep the evidence useful for decisions as the world changes.
+[livingscience.ai](https://livingscience.ai/econ/living-china-syndrome)
 
-## Slide 48 — AI Scientist for AI Safety
+Speaker notes: The replication matches the paper's Table 3 coefficients. The extension holds the 2000–2007 import shock fixed and tracks outcomes through 2023. The manufacturing employment effect goes from −0.26 in 2007 to a trough of −0.61 in 2018, past the paper's −0.596 headline, and is −0.54 in 2023. Wage penalties fade to about zero by 2023. The extension uses public county-level data rather than census microdata, so the 2007 estimate is not directly comparable to the original. The goal is to keep the evidence useful for decisions as the world changes.
+
+## Slide 50 — AI Scientist for AI Safety
+
+Tag: New form of governance
 
 AI behavior is increasingly unexpected.
 
@@ -785,41 +822,219 @@ We are also building AI scientists to automatically identify potential failures.
 
 Speaker notes: Cohere reported the behavior on October 26, 2026 and released raw traces on Hugging Face with a reproduction script. The model's reasoning said it would not use external tools; the next step tried to send a test string to an external server before the sandbox blocked it. Cohere could not determine intent, and critics argued the trigger search steered the model. Check Point replayed the moment 64 times and saw 52 different addresses. The point is speed: an AI scientist converts the released traces into an evaluation environment so other models can be tested in the same setting within days. Source: TechCrunch, October 26, 2026.
 
-## Slide 49 — Thank You
+## Slide 51 — Thank You to My Collaborators
 
-Decision Making
+![Ziad Obermeyer](resources/people/ziad_obermeyer.jpg)
 
-Healthcare (e.g., Nature Communications 2025, FAccT 2025, ML4H 2023)
+Ziad Obermeyer
 
-Persuasion (e.g., ACL 2023, TACL 2019, WWW 2016)
+![Shi Feng](resources/people/shi_feng.jpg)
 
-Political communication (e.g., PNAS Nexus 2024, Findings of EMNLP 2023, ICWSM 2016)
+Shi Feng
 
-Scientific Discovery
+![Amit Sharma](resources/people/amit_sharma.jpg)
 
-AI scientists (e.g., [NeuriCo](https://github.com/ChicagoHAI/neurico), [VERITAS](https://arxiv.org/abs/2607.02931v1), ACL 2025)
+Amit Sharma
 
-Interdisciplinary collaboration (sciences, social sciences) (e.g., [LivingScience](https://livingscience.ai), [NeuriCo-battery](https://www.youtube.com/watch?v=qiRSwn0fn04), [Virtual Cell Challenge](https://virtualcellchallenge.org), ICML Workshop 2026)
+![Xiao Liu](resources/people/lab_xiao_liu.jpg)
 
-![Human](resources/human.png)
+Xiao Liu
 
-![AI](resources/ai.png)
+![Davi Bastos Costa](resources/people/lab_davi_costa.jpg)
 
-Understanding and Improving AI
+Davi Bastos Costa
 
-Causal reasoning (e.g., NeurIPS 2026a, ICLR 2026, TMLR 2024)
+![Taewook Kim](resources/people/lab_taewook_kim.jpg)
 
-Interpretability/explanations (e.g., NeurIPS 2026b, TMLR 2023, FAccT 2020)
+Taewook Kim
 
-AI alignment/safety (e.g., ICML 2026, EMNLP 2026, NeurIPS 2025)
+![Xiaoyan (Elena) Bai](resources/people/lab_xiaoyan_bai.jpg)
+
+Xiaoyan (Elena) Bai
+
+![Dang Nguyen](resources/people/lab_dang_nguyen.png)
+
+Dang Nguyen
+
+![Qirun Dai](resources/people/lab_qirun_dai.jpg)
+
+Qirun Dai
+
+![Summer Eunhyung Ann](resources/people/lab_summer_ann.jpg)
+
+Summer Eunhyung Ann
+
+![Longtian Bao](resources/people/lab_longtian_bao.jpg)
+
+Longtian Bao
+
+![Miaosen Chai](resources/people/lab_miaosen_chai.jpg)
+
+Miaosen Chai
+
+![Jiayi Zhang](resources/people/lab_jiayi_zhang.jpg)
+
+Jiayi Zhang
+
+![Wufang Hong](resources/people/lab_wufang_hong.png)
+
+Wufang Hong
+
+![Mingxuan (Aldous) Li](resources/people/lab_mingxuan_li.jpg)
+
+Mingxuan (Aldous) Li
+
+![Filbert Aurelian Tjiaranata](resources/people/lab_filbert_tjiaranata.jpg)
+
+Filbert Aurelian Tjiaranata
+
+![Chenxi Peng](resources/people/lab_chenxi_peng.jpg)
+
+Chenxi Peng
+
+![Shane Gu](resources/people/lab_shane_gu.jpg)
+
+Shane Gu
+
+![Yufeng Lin](resources/people/lab_yufeng_lin.jpg)
+
+Yufeng Lin
+
+![Andrew Ren](resources/people/lab_andrew_ren.jpg)
+
+Andrew Ren
+
+![Nathan Delisle](resources/people/lab_nathan_delisle.jpg)
+
+Nathan Delisle
+
+![Aahaan Singh](resources/people/lab_aahaan_singh.jpg)
+
+Aahaan Singh
+
+![Yash Tikekar](resources/people/lab_yash_tikekar.jpg)
+
+Yash Tikekar
+
+![Chao-Chun (Joe) Hsu](resources/people/alum_joe_hsu.png)
+
+Chao-Chun (Joe) Hsu
+
+![Chacha Chen](resources/people/alum_chacha_chen.jpg)
+
+Chacha Chen
+
+![Han Liu](resources/people/alum_han_liu.png)
+
+Han Liu
+
+![Aditya Krishna](resources/people/alum_aditya_krishna.jpg)
+
+Aditya Krishna
+
+![Chenghao Yang](resources/people/alum_chenghao_yang.png)
+
+Chenghao Yang
+
+![Cristina Garbacea](resources/people/alum_cristina_garbacea.jpeg)
+
+Cristina Garbacea
+
+![Grace Wang](resources/people/alum_grace_wang.png)
+
+Grace Wang
+
+![Yi Wu](resources/people/alum_hanyi_wu.jpg)
+
+Yi Wu
+
+![Haokun Liu](resources/people/alum_haokun_liu.jpg)
+
+Haokun Liu
+
+![Bowen (Ike) Peng](resources/people/alum_ike_peng.jpeg)
+
+Bowen (Ike) Peng
+
+![Yuxin (Jessica) Ji](resources/people/alum_jessica_ji.jpg)
+
+Yuxin (Jessica) Ji
+
+![Jiamin Yang](resources/people/alum_jiamin_yang.jpg)
+
+Jiamin Yang
+
+![Jiayu Fu](resources/people/alum_jiayu_fu.jpg)
+
+Jiayu Fu
+
+![Julia Margie](resources/people/alum_julia_margie.jpg)
+
+Julia Margie
+
+![Julia Mendelsohn](resources/people/alum_julia_mendelsohn.png)
+
+Julia Mendelsohn
+
+![Justin Hwang](resources/people/alum_justin_hwang.png)
+
+Justin Hwang
+
+![Karen Zhou](resources/people/alum_karen_zhou.jpg)
+
+Karen Zhou
+
+![Shuyuan (Lily) Wang](resources/people/alum_lily_wang.jpg)
+
+Shuyuan (Lily) Wang
+
+![Miles Wang](resources/people/alum_miles_wang.jpg)
+
+Miles Wang
+
+![Mourad Heddaya](resources/people/alum_mourad_heddaya.jpg)
+
+Mourad Heddaya
+
+![Yangqiaoyu (Rosa) Zhou](resources/people/alum_rosa_zhou.png)
+
+Yangqiaoyu (Rosa) Zhou
+
+![Shengyuan Wang](resources/people/alum_shengyuan_wang.png)
+
+Shengyuan Wang
+
+![Tejes Srivastava](resources/people/alum_tejes_srivastava.jpg)
+
+Tejes Srivastava
+
+![Yixuan (Tom) Wang](resources/people/alum_tom_wang.jpg)
+
+Yixuan (Tom) Wang
+
+![Yuyang Jiang](resources/people/alum_yuyang_jiang.jpg)
+
+Yuyang Jiang
+
+Speaker notes: Collaborators on the work in this talk and members of the Chicago Human+AI Lab (photos from chicagohai.github.io and collaborators' public pages).
+
+## Slide 52 — Thank You
+
+- **Interactive interventionNew form of intervention**AI that helps people reason through policy choices
+
+- **Continuously updated evidenceNew form of evidence**Research findings that stay useful for decision making
+
+- **AI scientist for AI safetyNew form of governance**Evaluation that responds to emerging incidents and adapts to model behavior
+
+Thank You
 
 [chenhaot.com](https://chenhaot.com) · chenhao@uchicago.edu · @ChenhaoTan
 
-## Slide 50 — Backup Slides
+## Slide 53 — Backup Slides
 
 Backup Slides
 
-## Slide 51 — Patient Sex, Race, and Age Are Not Related to Workload
+## Slide 54 — Patient Sex, Race, and Age Are Not Related to Workload
 
 ![Regressions of patient sex, race, and age on prior workload: workload coefficients −0.0055 (0.006), −0.0023 (0.006), −0.1562 (0.189), none significant](resources/table-sanity.png)
 
@@ -827,7 +1042,7 @@ PowerPoint source: `physician_fatigue.pptx#29`
 
 Speaker notes: Earlier analysis. The workload coefficients are not statistically significant with the included physician, chief-complaint, and time controls.
 
-## Slide 52 — Chief Complaints Are Not Related to Workload Beyond Chance
+## Slide 55 — Chief Complaints Are Not Related to Workload Beyond Chance
 
 ![Ordered p-values for the relationship between chief complaint and workload](resources/sanity_check_2.png)
 

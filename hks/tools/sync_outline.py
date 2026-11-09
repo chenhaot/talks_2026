@@ -72,6 +72,12 @@ The testing-yield result uses the published **19%** estimate. Earlier physician-
         note_text = '\n\n'.join(text(n) for n in notes)
         refs = section.xpath('.//*[contains(concat(" ", normalize-space(@class), " "), " slide-references ")]')
         reference = '\n\n'.join(render(r).strip() for r in refs)
+        for node in section.xpath('.//div[contains(concat(" ",normalize-space(@class)," ")," act-header ")]'):
+            for tag in node.xpath('.//span[contains(@class,"dir-tag")]'):
+                tag.tail = None
+                tag.text = 'Tag: ' + text(tag)
+                wrap = html.Element('p'); wrap.append(tag)
+                node.addnext(wrap)
         for node in notes + refs + section.xpath('.//div[contains(concat(" ",normalize-space(@class)," ")," act-header ")]'):
             node.getparent().remove(node)
         if i == 1:

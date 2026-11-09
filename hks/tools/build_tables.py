@@ -83,6 +83,20 @@ Coefficient & \hl{1}{\st{$-0.0081$}{0.009}} & \hl{2}{\st{$-0.2935$\sig{*}}{0.147
 \end{tabular}
 """
 
+WORKLOAD_YIELD = r"""
+\begin{tabular}{@{}lc@{}}
+\toprule
+ & Effect of workload \\
+ & on yield of testing \\
+\midrule
+Workload (Day) & \hl{1}{\st{$-0.0081$}{0.009}} \\
+\addlinespace
+""" + CONTROLS_9 % dict(blank='', tod='YES', rest='YES', all='YES') + r"""
+\bottomrule
+\multicolumn{2}{@{}l}{$n=1{,}017$; not significant at $p<0.05$}
+\end{tabular}
+"""
+
 RACE = r"""
 \begin{tabular}{@{}lcc@{}}
 \toprule
@@ -219,6 +233,7 @@ Original History of Present Illness & $-66\%$ \\
 
 TABLES = {
     'table-yield': (YIELD, 2),
+    'table-workload-yield': (WORKLOAD_YIELD, 1),
     'table-race': (RACE, 2),
     'table-features': (FEATURES, 2),
     'table-auc': (AUC, 0),
@@ -248,8 +263,12 @@ def display_sizes():
 
 
 if __name__ == '__main__':
+    import sys
+    only = sys.argv[1:]
     with tempfile.TemporaryDirectory() as tmp:
         for name, (body, steps) in TABLES.items():
+            if only and name not in only:
+                continue
             for step in range(steps + 1):
                 build(name, body, step, Path(tmp))
     print(json.dumps(display_sizes(), indent=1))
